@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import * as ROUTES from '../../constants/routes'
-import { Link } from 'react-router-dom';
+import * as ROUTES from "../../constants/routes";
+import { Link } from "react-router-dom";
+import Header from "../StudyComponents/Header";
 
 const SignInWrapper = styled.div`
   display: grid;
-  max-width: 300px;
-  position: absolute;
-  right: 50%;
+`;
+
+const SignInBody = styled.div`
+  background: red;
 `;
 
 const Button = styled.button``;
@@ -40,22 +42,25 @@ class SignIn extends Component {
   render() {
     return (
       <SignInWrapper>
-        <Input
-          name="login"
-          value={this.state.login}
-          onChange={this.handleChange}
-          placeholder="Login: "
-        />
-        <Input
-          name="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          placeholder="Password: "
-        />
-        <Button onClick={this.handleClick}>Войти</Button>
-        <Button>
-          <Link to={ROUTES.SIGNUP}>О нас</Link>
-        </Button>
+        <Header />
+        <SignInBody>
+          <Input
+            name="login"
+            value={this.state.login}
+            onChange={this.handleChange}
+            placeholder="Login: "
+          />
+          <Input
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            placeholder="Password: "
+          />
+          <Button onClick={this.handleClick}>Войти</Button>
+          <Button>
+            <Link to={ROUTES.SIGNUP}>О нас</Link>
+          </Button>
+        </SignInBody>
       </SignInWrapper>
     );
   }

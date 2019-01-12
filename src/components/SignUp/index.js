@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
+import Header from "../StudyComponents/Header";
 
 const SignUpWrapper = styled.div`
   display: grid;
-  max-width: 300px;
-  position: absolute;
-  right: 50%;
+`;
+const SignUpBody = styled.div `
 `;
 
 const Button = styled.button``;
@@ -40,22 +40,25 @@ class SignUp extends Component {
   render() {
     return (
       <SignUpWrapper>
-        <Input
-          name="login"
-          value={this.state.login}
-          onChange={this.handleChange}
-          placeholder="Login: "
-        />
-        <Input
-          name="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          placeholder="Password: "
-        />
-        <Button onClick={this.handleClick}>Зарегистироваться</Button>
-        <Button>
-          <Link to={ROUTES.SIGNIN}>Войти</Link>
-        </Button>
+        <Header />
+        <SignUpBody>
+          <Input
+            name="login"
+            value={this.state.login}
+            onChange={this.handleChange}
+            placeholder="Login: "
+          />
+          <Input
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            placeholder="Password: "
+          />
+          <Button onClick={this.handleClick}>Зарегистироваться</Button>
+          <Button>
+            <Link to={ROUTES.SIGNIN}>Войти</Link>
+          </Button>
+        </SignUpBody>
       </SignUpWrapper>
     );
   }
