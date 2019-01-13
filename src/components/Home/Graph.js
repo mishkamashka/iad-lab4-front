@@ -7,14 +7,21 @@ class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      R: 3,
+      r: 0,
       x: 3,
       y: 3
     };
   }
+
   componentDidMount() {
-    this.drawFigures();
+    this.drawFigures(this.state.r);
     this.drawAxis();
+  }
+
+  updateCoordinatesFromParent(x, y, r) {
+    this.state.x = x;
+    this.state.y = y;
+    this.state.r = r;
   }
 
   drawAxis() {
@@ -55,10 +62,10 @@ class Graph extends Component {
     context.fillText("X", graphWidth - 20, graphWidth / 2 + 10);
 
     //Draw measures if radius is set
-    if (Number(this.state.R) > 0) {
+    if (Number(this.state.r) > 0) {
       context.beginPath();
       //   TODO: check var statement
-      var pixelsForRadius = Number(this.state.R) * k;
+      var pixelsForRadius = Number(this.state.r) * k;
 
       //Draw measures
       for (var l = 40; l < graphWidth / 2 - 20; l = l + 40) {
@@ -85,38 +92,51 @@ class Graph extends Component {
     }
   }
 
-  drawFigures() {
+  drawFigures(radius) {
+    // this.setState = {
+    //   r: radius
+    // };
+    // alert(this.props.x);
+    this.state.r = radius;
     const context = this.refs.canvas.getContext("2d");
-    const graphWidth = this.refs.canvas.width;
-    var pixelsForRadius = Number(this.state.R) * 40;
+    context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
 
-    context.beginPath();
-    context.fillStyle = "#5c99ED";
-    context.strokeStyle = "#5c99ED";
-    //Bottom-Left
-    context.moveTo(graphWidth / 2, graphWidth / 2 - 1 - pixelsForRadius / 2);
-    context.lineTo(graphWidth / 2 - 1 + pixelsForRadius / 2, graphWidth / 2);
-    context.lineTo(graphWidth / 2 - 1, graphWidth / 2 - 1);
-    context.fill();
-    //Top-Left
-    context.fillRect(
-      graphWidth / 2 + 1 - pixelsForRadius,
-      graphWidth / 2 + 1 - pixelsForRadius,
-      pixelsForRadius - 1,
-      pixelsForRadius - 1
-    );
-    //Bottom-Right
-    context.closePath();
-    context.beginPath();
-    context.arc(
-      graphWidth / 2 - 1,
-      graphWidth / 2 + 1,
-      pixelsForRadius - 1,
-      0.5 * Math.PI,
-      1.5 * Math.PI
-    );
-    context.closePath();
-    context.fill();
+    if (radius > 0) {
+      const graphWidth = this.refs.canvas.width;
+      var pixelsForRadius = Number(radius) * 40;
+
+      context.beginPath();
+      context.fillStyle = "#5c99ED";
+      context.strokeStyle = "#5c99ED";
+      // треугольник
+      context.moveTo(graphWidth / 2, graphWidth / 2 - 1 + pixelsForRadius / 2);
+      context.lineTo(graphWidth / 2 - 1 - pixelsForRadius / 2, graphWidth / 2);
+      context.lineTo(graphWidth / 2 - 1, graphWidth / 2 - 1);
+      context.fill();
+      // прямоугольник
+      context.fillRect(
+        graphWidth / 2 + 1,
+        graphWidth / 2 + 1 - pixelsForRadius,
+        pixelsForRadius / 2 - 1,
+        pixelsForRadius - 1
+      );
+      // окружность
+      context.closePath();
+      context.beginPath();
+      context.arc(
+        graphWidth / 2 - 1,
+        graphWidth / 2 - 1,
+        pixelsForRadius - 1,
+        1 * Math.PI,
+        1.5 * Math.PI
+      );
+
+      context.fill();
+      context.closePath();
+    } else {
+      context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
+      // alert("Радиус должен быть больше 0");
+    }
   }
 
   updateCanvas() {}

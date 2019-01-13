@@ -6,6 +6,9 @@ import * as ROUTES from "./constants/routes";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 const AppWrapper = styled.div`
   background: red;
