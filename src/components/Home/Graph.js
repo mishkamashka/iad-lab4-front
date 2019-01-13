@@ -8,8 +8,8 @@ class Graph extends Component {
     super(props);
     this.state = {
       r: 0,
-      x: 3,
-      y: 3
+      x: 0,
+      y: 0
     };
   }
 
@@ -92,12 +92,8 @@ class Graph extends Component {
     }
   }
 
-  drawFigures(radius) {
-    // this.setState = {
-    //   r: radius
-    // };
-    // alert(this.props.x);
-    this.state.r = radius;
+  drawFigures() {
+    var radius = this.state.r;
     const context = this.refs.canvas.getContext("2d");
     context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
 

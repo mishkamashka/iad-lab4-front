@@ -16,9 +16,9 @@ class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: null,
-      y: 1,
-      r: 2
+      x: 0,
+      y: 0,
+      r: 0
     };
     this.onChangeSlider = this.onChangeSlider.bind(this);
     this.onChangeDropdown = this.onChangeDropdown.bind(this);
@@ -30,14 +30,14 @@ class InputForm extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    this.child.current.updateCoordinatesFromParent(this.state.x, this.state.y, this.state.r);
+    this.child.current.updateCoordinatesFromParent(e.target.value.value, this.state.y, this.state.r);
   }
 
   onChangeRadius(e) {
     this.setState({r: e.target.value})
-    this.child.current.drawFigures(e.target.value.value);
+    this.child.current.updateCoordinatesFromParent(this.state.x, this.state.y, e.target.value.value);
+    this.child.current.drawFigures();
     this.child.current.drawAxis();
-    this.child.current.updateCoordinatesFromParent(this.state.x, this.state.y, this.state.r);
   }
 
   onChangeSlider(e) {
@@ -49,7 +49,7 @@ class InputForm extends Component {
     }
 
     this.setState({ y: newValue });
-    this.child.current.updateCoordinatesFromParent(this.state.x, this.state.y, this.state.r);
+    this.child.current.updateCoordinatesFromParent(this.state.x, e.value, this.state.r);
   }
 
   render() {
