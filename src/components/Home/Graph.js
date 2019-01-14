@@ -11,6 +11,8 @@ class Graph extends Component {
       x: 0,
       y: 0
     };
+    this.drawPoint = this.drawPoint.bind(this);
+    this.setPoint = this.setPoint.bind(this);
   }
 
   componentDidMount() {
@@ -135,12 +137,42 @@ class Graph extends Component {
     }
   }
 
-  updateCanvas() {}
+  setPoint(e) {
+    var canvas1 = document.getElementById("a");
+    var rect = canvas1.getBoundingClientRect();
+    var offset = (rect.width - canvas1.width) / 2 + 1;
+    var x = e.clientX - rect.left - offset;
+    var y = e.clientY - rect.top - offset;
+    var real_x = (x - canvas1.width / 2) / 40;
+    var real_y = -(y - canvas1.width / 2) / 40;
+    alert("aefea");
+
+    // TODO: remove this from here
+    this.drawPoint(this.refs.canvas.getContext("2d"), x, y, true);
+    // todo: add doXYRequest here
+  }
+
+  drawPoint(context, x, y, doesBelong) {
+    context.beginPath();
+    if (doesBelong) {
+      context.fillStyle = "Blue";
+    } else {
+      context.fillStyle = "Red";
+    }
+    context.arc(x, this.refs.canvas.width - y, 3, 0, 2 * Math.PI);
+    context.fill();
+  }
 
   render() {
     return (
       <GraphWrapper>
-        <canvas ref="canvas" width={500} height={500} />
+        <canvas
+          id="a"
+          onClick={this.setPoint}
+          ref="canvas"
+          width={500}
+          height={500}
+        />
       </GraphWrapper>
     );
   }

@@ -42,7 +42,6 @@ class SignIn extends Component {
   render() {
     return (
       <SignInWrapper>
-        <Header />
         <SignInBody>
           <Input
             name="login"

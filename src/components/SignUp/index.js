@@ -40,7 +40,6 @@ class SignUp extends Component {
   render() {
     return (
       <SignUpWrapper>
-        <Header />
         <SignUpBody>
           <Input
             name="login"
