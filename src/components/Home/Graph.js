@@ -121,6 +121,7 @@ class Graph extends Component {
       // окружность
       context.closePath();
       context.beginPath();
+      context.moveTo(graphWidth / 2, graphWidth / 2);
       context.arc(
         graphWidth / 2 - 1,
         graphWidth / 2 - 1,
