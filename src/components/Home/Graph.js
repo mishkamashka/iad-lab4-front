@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import axios from 'axios';
+
+//TODO depends on where the server is
+const ServerURL = 'localhost:9999';
 
 const GraphWrapper = styled.div``;
 
@@ -7,9 +11,10 @@ class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      r: 0,
       x: 0,
-      y: 0
+      y: 0,
+      r: 0,
+      doesBelong: 0
     };
     this.drawPoint = this.drawPoint.bind(this);
     this.setPoint = this.setPoint.bind(this);
@@ -150,6 +155,8 @@ class Graph extends Component {
 
     // TODO: remove this from here
     this.drawPoint(this.refs.canvas.getContext("2d"), x, y, true);
+    this.setState(real_x, real_y, this.state.r, 0);
+    doXYRequest(x, y);
     // todo: add doXYRequest here
   }
 
@@ -179,3 +186,71 @@ class Graph extends Component {
   }
 }
 export default Graph;
+
+
+function doXYRequest(x, y) {
+
+  //TODO: what is response and what happens at this.setState(response.data)
+  axios.get(ServerURL + '/points/new_point_' + this.state.x + '_' + this.state.y + '_' + this.state.r)
+    .then(response => onAjaxSuccess(response.data));
+
+}
+
+function doRRequest(radius) {
+  // $.ajax({
+  //         type: "post",
+  //         url: "controllerServlet",
+  //         data: {
+  //             radius: radius,
+  //             doSave: 0
+  //         },
+  //         success: (onAjaxSuccess)
+  //     }
+  // );
+}
+
+function onAjaxSuccess(data) {
+  // var return_data = JSON.parse(data);
+  // var context = canvas.getContext("2d");
+  // var row = document.getElementById("results");
+  // row.innerHTML = '<div class=\"row header__table\">' +
+  //     '<div class=\"cell\">X</div>' +
+  //     '<div class=\"cell\">Y</div>' +
+  //     '<div class=\"cell\">R</div>' +
+  //     '<div class=\"cell\">Result</div>' +
+  //     '</div>';
+  // context.clearRect(0, 0, canvas.width, canvas.height);
+  // canvasFill();
+  // if (return_data.length > 1) {
+  //     for (var i = 0; i < return_data.length - 1; i++) {
+  //         x = return_data[i].x * k + graphWidth / 2;
+  //         y = return_data[i].y * k + graphWidth / 2;
+  //         drawPoint(context, x, y, return_data[i].isInArea);
+
+  //         var newRow = document.createElement("div");
+  //         newRow.setAttribute("class", "row");
+  //         newRow.innerHTML = '<div class =\"cell\" data-title=\"X\">' + return_data[i].x.toFixed(2) + '</div>' +
+  //             '<div class =\"cell\" data-title=\"Y\">' + return_data[i].y.toFixed(2) + '</div>' +
+  //             '<div class =\"cell\" data-title=\"R\">' + return_data[i].radius.toFixed(2) + '</div>' +
+  //             '<div class =\"cell\" data-title=\"Result\">' + return_data[i].isInArea + '</div>' +
+  //             '</div>';
+  //         row.appendChild(newRow);
+  //     }
+
+  //     if (document.getElementById("clearBtn") === null) {
+  //         content = document.getElementById("content");
+  //         var clearBtn = document.createElement("div");
+  //         clearBtn.setAttribute("id", "clearBtn");
+  //         clearBtn.setAttribute("style", "display: flex; flex-direction: column");
+  //         clearBtn.innerHTML = '<div id=\"ClearBtn\" style=\"display: flex; flex-direction: column;\"><button onclick=\"clearList()\" class=\"btn btn--font input__global--margin input__global--size\">clear list</button></div>';
+  //         content.appendChild(clearBtn);
+  //     }
+  // } else {
+  //         content = document.getElementById("content");
+  //         clearBtn = document.getElementById("clearBtn");
+  //         content.removeChild(clearBtn);
+  // }
+  // var errorMsg = return_data[return_data.length - 1].errorMsg;
+  // var error = document.getElementById("error_msg");
+  // error.innerText = errorMsg;
+}
