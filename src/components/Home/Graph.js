@@ -155,7 +155,7 @@ class Graph extends Component {
 
     // TODO: remove this from here
     this.drawPoint(this.refs.canvas.getContext("2d"), x, y, true);
-    this.setState(real_x, real_y, this.state.r, 0);
+    // this.setState(real_x, real_y, this.state.r, 0);
     doXYRequest(x, y);
     // todo: add doXYRequest here
   }
