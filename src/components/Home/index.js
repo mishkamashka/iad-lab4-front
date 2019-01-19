@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import InputForm from "./InputForm";
-import Graph from "./Graph";
+import GraphContainer from "../../containers/GraphContainer";
+import InputFormContainer from "../../containers/InputFormContainer";
 
-const HomeWrapper = styled.div`
-    
-`;
+const HomeWrapper = styled.div``;
 
 class Home extends Component {
   render() {
     return (
       <HomeWrapper>
-        <InputForm />
+        <GraphContainer />
+        <InputFormContainer />
       </HomeWrapper>
     );
   }

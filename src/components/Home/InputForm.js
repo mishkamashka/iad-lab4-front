@@ -39,12 +39,13 @@ class InputForm extends Component {
 
   onChangeRadius(e) {
     this.setState({ r: e.target.value });
-    this.child.current.updateCoordinatesFromParent(
-      this.state.x,
-      this.state.y,
-      e.target.value.value
-    );
-    this.child.current.drawFigures();
+    // this.child.current.updateCoordinatesFromParent(
+    //   this.state.x,
+    //   this.state.y,
+    //   e.target.value.value
+    // );
+    this.props.drawFigures(e.target.value);
+    // this.child.current.drawFigures();
     this.child.current.drawAxis();
   }
 
@@ -79,7 +80,6 @@ class InputForm extends Component {
 
     return (
       <InputFormWrapper>
-        <Graph ref={this.child} props={this.state.r} />
         <InputX>
           <Dropdown
             name="x"

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import axios from 'axios';
+import axios from "axios";
 
 //TODO depends on where the server is
-const ServerURL = 'localhost:9999';
+const ServerURL = "localhost:9999";
 
 const GraphWrapper = styled.div``;
 
@@ -187,13 +187,19 @@ class Graph extends Component {
 }
 export default Graph;
 
-
 function doXYRequest(x, y) {
-
   //TODO: what is response and what happens at this.setState(response.data)
-  axios.get(ServerURL + '/points/new_point_' + this.state.x + '_' + this.state.y + '_' + this.state.r)
+  axios
+    .get(
+      ServerURL +
+        "/points/new_point_" +
+        this.state.x +
+        "_" +
+        this.state.y +
+        "_" +
+        this.state.r
+    )
     .then(response => onAjaxSuccess(response.data));
-
 }
 
 function doRRequest(radius) {
@@ -226,7 +232,6 @@ function onAjaxSuccess(data) {
   //         x = return_data[i].x * k + graphWidth / 2;
   //         y = return_data[i].y * k + graphWidth / 2;
   //         drawPoint(context, x, y, return_data[i].isInArea);
-
   //         var newRow = document.createElement("div");
   //         newRow.setAttribute("class", "row");
   //         newRow.innerHTML = '<div class =\"cell\" data-title=\"X\">' + return_data[i].x.toFixed(2) + '</div>' +
@@ -236,7 +241,6 @@ function onAjaxSuccess(data) {
   //             '</div>';
   //         row.appendChild(newRow);
   //     }
-
   //     if (document.getElementById("clearBtn") === null) {
   //         content = document.getElementById("content");
   //         var clearBtn = document.createElement("div");
