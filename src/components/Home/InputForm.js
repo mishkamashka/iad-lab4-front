@@ -46,7 +46,7 @@ class InputForm extends Component {
     // );
     this.props.drawFigures(e.target.value);
     // this.child.current.drawFigures();
-    this.child.current.drawAxis();
+    // this.child.current.drawAxis();
   }
 
   onChangeSlider(e) {

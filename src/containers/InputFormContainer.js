@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import InputForm from "../components/Home/InputForm";
-
+import { drawFigures } from "../actions/InputFormActions";
 class InputFormContainer extends Component {
   render() {
-    return <InputForm />;
+    const { drawFigures } = this.props;
+    return <InputForm drawFigures={drawFigures} />;
   }
 }
 const mapStateToProps = store => {
@@ -12,7 +13,9 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    drawFigures: radius => dispatch(drawFigures(radius))
+  };
 };
 
 export default connect(

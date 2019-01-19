@@ -25,6 +25,11 @@ class Graph extends Component {
     this.drawAxis();
   }
 
+  componentDidUpdate() {
+    this.drawFigures();
+    this.drawAxis();
+  }
+
   updateCoordinatesFromParent(x, y, r) {
     this.state.x = x;
     this.state.y = y;
@@ -69,10 +74,10 @@ class Graph extends Component {
     context.fillText("X", graphWidth - 20, graphWidth / 2 + 10);
 
     //Draw measures if radius is set
-    if (Number(this.state.r) > 0) {
+    if (Number(this.props.radius.value) > 0) {
       context.beginPath();
       //   TODO: check var statement
-      var pixelsForRadius = Number(this.state.r) * k;
+      var pixelsForRadius = Number(this.props.radius.value) * k;
 
       //Draw measures
       for (var l = 40; l < graphWidth / 2 - 20; l = l + 40) {
@@ -100,7 +105,7 @@ class Graph extends Component {
   }
 
   drawFigures() {
-    var radius = this.state.r;
+    var radius = this.props.radius.value;
     const context = this.refs.canvas.getContext("2d");
     context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
 
@@ -174,13 +179,7 @@ class Graph extends Component {
   render() {
     return (
       <GraphWrapper>
-        <canvas
-          id="a"
-          onClick={this.setPoint}
-          ref="canvas"
-          width={500}
-          height={500}
-        />
+        <canvas id="a" ref="canvas" width={500} height={500} />
       </GraphWrapper>
     );
   }
