@@ -4,12 +4,69 @@ import { Slider } from "primereact/slider";
 import { Dropdown } from "primereact/dropdown";
 
 const InputFormWrapper = styled.div`
+  padding-top: 30px;
+  padding-bottom: 30px;
   border: 2px solid red;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr [col-start]);
+  grid-template-rows: repeat(5, 1fr [col-start]);
+  grid-gap: 30px 10px;
 `;
 const InputSlider = styled.input``;
-const InputX = styled.div``;
-const InputY = styled.div``;
-const InputR = styled.div``;
+const InputX = styled.div`
+  grid-column: 3 / span 2;
+  justify-self: center;
+`;
+const InputY = styled.div`
+  grid-column: 3 / span 2;
+  justify-self: center;
+`;
+const InputR = styled.div`
+  grid-column: 3 / span 2;
+  justify-self: center;
+`;
+const Button = styled.button`
+  grid-column: 3 / span 2;
+  justify-self: center;
+  box-shadow: 0 2px 5px #00000029, 0 3px 6px #0000001a;
+  z-index: 2;
+  text-decoration: none;
+  background: #5bcccc;
+  border: 0;
+  position: relative;
+  cursor: pointer;
+  outline: unset;
+  font-size: 12pt;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  min-width: 200px;
+  min-height: 57px;
+
+  ::before {
+    -webkit-transition: 0.5s all ease;
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: "";
+    background-color: #3c8384;
+    z-index: -1;
+  }
+
+  :hover::before {
+    left: 0;
+    right: 0;
+    opacity: 1;
+  }
+
+  :active {
+    position: relative;
+    bottom: -6px;
+  }
+`;
 
 class InputForm extends Component {
   constructor(props) {
@@ -17,6 +74,8 @@ class InputForm extends Component {
     this.onChangeSlider = this.onChangeSlider.bind(this);
     this.onChangeDropdown = this.onChangeDropdown.bind(this);
     this.onChangeRadius = this.onChangeRadius.bind(this);
+    this.onClickSendData = this.onClickSendData.bind(this);
+    this.onClickClearList = this.onClickClearList.bind(this);
   }
 
   onChangeDropdown(e) {
@@ -29,6 +88,18 @@ class InputForm extends Component {
 
   onChangeSlider(e) {
     this.props.setY(e.value);
+  }
+
+  onClickSendData(e) {
+    this.props.checkFormPoint(
+      this.props.inputForm.x.value,
+      this.props.inputForm.y,
+      this.props.inputForm.radius.value
+    );
+  }
+
+  onClickClearList(e) {
+    this.props.clearPointsList();
   }
 
   render() {
@@ -84,6 +155,8 @@ class InputForm extends Component {
             optionLabel="x"
           />
         </InputR>
+        <Button onClick={this.onClickSendData}>check</Button>
+        <Button onClick={this.onClickClearList}>clear</Button>
       </InputFormWrapper>
     );
   }
