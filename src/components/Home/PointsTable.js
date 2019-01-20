@@ -8,19 +8,19 @@ export default class PointsTable extends Component {
   render() {
     return (
       <div>
-        <div id="results" class="wrap__table table ">
-          <div class="row header__table">
-            <div class="cell">X</div>
-            <div class="cell">Y</div>
-            <div class="cell">R</div>
-            <div class="cell">Result</div>
+        <div id="results" className="wrap__table table ">
+          <div className="row header__table">
+            <div className="cell">X</div>
+            <div className="cell">Y</div>
+            <div className="cell">R</div>
+            <div className="cell">Result</div>
           </div>
           {/* example row */}
-          <div class="row">
-            <div class="cell">X</div>
-            <div class="cell">Y</div>
-            <div class="cell">R</div>
-            <div class="cell">Result</div>
+          <div className="row">
+            <div className="cell">X</div>
+            <div className="cell">Y</div>
+            <div className="cell">R</div>
+            <div className="cell">Result</div>
           </div>
         </div>
       </div>
