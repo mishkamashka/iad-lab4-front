@@ -23,8 +23,9 @@ class Graph extends Component {
   componentDidMount() {
     this.drawFigures();
     this.drawAxis();
+    this.props.getAllPoints();
   }
-
+  
   componentDidUpdate() {
     this.drawFigures();
     this.drawAxis();

@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Graph from "../components/Home/Graph";
+import { bindActionCreators } from "redux";
+import * as graphActions from '../actions/GraphActions'
 
 class GraphContainer extends Component {
   render() {
-    const { graph } = this.props;
-    return <Graph radius={graph.radius} />;
+    const { graph, graphActions } = this.props;
+    return (
+      <Graph radius={graph.radius} getAllPoints={graphActions.getAllPoints} />
+    );
   }
 }
 const mapStateToProps = store => {
@@ -15,7 +19,9 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    graphActions: bindActionCreators(graphActions, dispatch)
+  };
 };
 
 export default connect(
