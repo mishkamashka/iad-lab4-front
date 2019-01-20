@@ -1,5 +1,4 @@
-import { DRAW_GRAPH } from "../actions/GraphActions";
-import { DRAW_FIGURES } from "../actions/InputFormActions";
+import { SET_RADIUS } from "../actions/InputFormActions";
 
 const initialState = {
   radius: 0,
@@ -9,10 +8,7 @@ const initialState = {
 
 export function graphReducer(state = initialState, action) {
   switch (action.type) {
-    case DRAW_GRAPH:
-      return { ...state, radius: action.payload, error: "" };
-
-    case DRAW_FIGURES:
+    case SET_RADIUS:
       return { ...state, radius: action.payload, error: "" };
 
     default:

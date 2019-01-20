@@ -1,11 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import InputForm from "../components/Home/InputForm";
-import { drawFigures } from "../actions/InputFormActions";
+import { setRadius } from "../actions/InputFormActions";
+import { showAlert } from "../actions/InputFormActions";
+import { setX, setY } from "../actions/InputFormActions";
+
 class InputFormContainer extends Component {
   render() {
-    const { inputForm, drawFigures } = this.props;
-    return <InputForm drawFigures={drawFigures} />;
+    const { inputForm, setX, setY, setRadius, showAlert } = this.props;
+    return (
+      <InputForm
+        inputForm={inputForm}
+        setX={setX}
+        setY={setY}
+        setRadius={setRadius}
+        showAlert={showAlert}
+      />
+    );
   }
 }
 const mapStateToProps = store => {
@@ -16,7 +27,10 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    drawFigures: radius => dispatch(drawFigures(radius))
+    setX: x => dispatch(setX(x)),
+    setY: y => dispatch(setY(y)),
+    setRadius: radius => dispatch(setRadius(radius)),
+    showAlert: message => dispatch(showAlert(message))
   };
 };
 

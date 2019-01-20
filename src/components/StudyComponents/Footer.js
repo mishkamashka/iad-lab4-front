@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import GithubSVG from '../../static/img/github.svg';
-import vkSVG from '../../static/img/vk.d89817ac.svg'
+import GithubSVG from "../../static/img/github.svg";
+import vkSVG from "../../static/img/vk.d89817ac.svg";
 
 const FooterWrapper = styled.footer`
   display: grid;
@@ -36,10 +36,6 @@ const FooterIcon = styled.img`
 `;
 
 export default class Footer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <FooterWrapper>

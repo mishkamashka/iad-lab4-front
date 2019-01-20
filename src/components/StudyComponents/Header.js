@@ -116,16 +116,15 @@ class Header extends Component {
         <Author>Анисимова Мария, P3210</Author>
         <MediaQuery query="(max-width: 759px)">
           <Overlay id="about__panel" style={{ height: 0 + "%" }}>
-            <a
-              href="javascript:void(0)"
-              class="closebtn"
+            <button
+              // class="closebtn"
               onClick={this.closeNav}
             >
               &times;
-            </a>
+            </button>
             <OverlayContent>
-              <a>Анисимова Мария</a>
-              <a>группа P3210</a>
+              <p>Анисимова Мария</p>
+              <p>группа P3210</p>
             </OverlayContent>
           </Overlay>
         </MediaQuery>
