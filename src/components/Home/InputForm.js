@@ -6,7 +6,6 @@ import { Dropdown } from "primereact/dropdown";
 const InputFormWrapper = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
-  border: 2px solid red;
   display: grid;
   grid-template-columns: repeat(6, 1fr [col-start]);
   grid-template-rows: repeat(5, 1fr [col-start]);
@@ -39,7 +38,7 @@ const Button = styled.button`
   font-size: 12pt;
   text-transform: uppercase;
   letter-spacing: 3px;
-  min-width: 200px;
+  min-width: 300px;
   min-height: 57px;
 
   ::before {
