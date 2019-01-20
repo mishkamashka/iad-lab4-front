@@ -21,7 +21,7 @@ class Graph extends Component {
   }
 
   componentDidMount() {
-    this.drawFigures(this.state.r);
+    this.drawFigures();
     this.drawAxis();
   }
 
@@ -252,7 +252,7 @@ function onAjaxSuccess(data) {
   //         content = document.getElementById("content");
   //         clearBtn = document.getElementById("clearBtn");
   //         content.removeChild(clearBtn);
-  // }
+  // }D
   // var errorMsg = return_data[return_data.length - 1].errorMsg;
   // var error = document.getElementById("error_msg");
   // error.innerText = errorMsg;

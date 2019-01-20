@@ -4,12 +4,14 @@ import InputForm from "../components/Home/InputForm";
 import { drawFigures } from "../actions/InputFormActions";
 class InputFormContainer extends Component {
   render() {
-    const { drawFigures } = this.props;
+    const { inputForm, drawFigures } = this.props;
     return <InputForm drawFigures={drawFigures} />;
   }
 }
 const mapStateToProps = store => {
-  return {};
+  return {
+    inputForm: store.inputForm
+  };
 };
 
 const mapDispatchToProps = dispatch => {
