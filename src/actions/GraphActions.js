@@ -23,7 +23,7 @@ export function addPoint() {
       .catch(function(error) {
         // handle error
         dispatch({
-          type: ADD_POINT_SUCCESS,
+          type: ADD_POINT_FAIL,
           error: error.message
         });
         
