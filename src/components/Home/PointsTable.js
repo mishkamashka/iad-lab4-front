@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import "./pointsTable.css";
 export default class PointsTable extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidUpdate(){
-    console.log("обновился")
-  }
-  
   render() {
     const { points } = this.props;
     return (
@@ -26,7 +18,7 @@ export default class PointsTable extends Component {
               <div className="cell">{item.x}</div>
               <div className="cell">{item.y}</div>
               <div className="cell">{item.r}</div>
-              <div className="cell">{item.inArea}</div>
+              <div className="cell">{item.inArea === true ? "true" : "false"}</div>
             </div>
           ))}
       
