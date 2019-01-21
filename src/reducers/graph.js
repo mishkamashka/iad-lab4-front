@@ -7,7 +7,9 @@ import {
 
 import {
   GET_ALL_POINTS_SUCCESS,
-  GET_ALL_POINTS_FAIL
+  GET_ALL_POINTS_FAIL,
+  ADD_POINT_FAIL,
+  ADD_POINT_SUCCESS
 } from "../actions/GraphActions";
 
 const initialState = {
@@ -18,6 +20,12 @@ const initialState = {
 
 export function graphReducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_POINT_SUCCESS:
+      return { ...state, points: [...state.points, action.payload], error: "" };
+
+    case ADD_POINT_FAIL:
+      return { ...state, error: action.error };
+
     case GET_ALL_POINTS_SUCCESS:
       return { ...state, points: action.payload, error: "" };
 

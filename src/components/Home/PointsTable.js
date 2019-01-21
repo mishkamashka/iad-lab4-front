@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import "./pointsTable.css";
+import styled from "styled-components";
+
+const PointsTableWrapper = styled.div`
+  padding-bottom: 30px;
+`;
+
 export default class PointsTable extends Component {
   render() {
     const { points } = this.props;
     return (
-      <div>
+      <PointsTableWrapper>
         <div id="results" className="wrap__table table ">
           <div className="row header__table">
             <div className="cell">X</div>
@@ -18,12 +24,13 @@ export default class PointsTable extends Component {
               <div className="cell">{item.x}</div>
               <div className="cell">{item.y}</div>
               <div className="cell">{item.r}</div>
-              <div className="cell">{item.inArea === true ? "true" : "false"}</div>
+              <div className="cell">
+                {item.inArea === true ? "true" : "false"}
+              </div>
             </div>
           ))}
-      
         </div>
-      </div>
+      </PointsTableWrapper>
     );
   }
 }

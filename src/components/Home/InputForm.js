@@ -19,6 +19,7 @@ const InputX = styled.div`
 const InputY = styled.div`
   grid-column: 3 / span 2;
   justify-self: center;
+  display: grid;
 `;
 const InputR = styled.div`
   grid-column: 3 / span 2;

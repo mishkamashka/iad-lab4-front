@@ -5,17 +5,14 @@ import axios from "axios";
 //TODO depends on where the server is
 const ServerURL = "localhost:9999";
 
-const GraphWrapper = styled.div``;
+const GraphWrapper = styled.div`
+  padding-top: 80px;
+  text-align: center;
+`;
 
 class Graph extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      x: 0,
-      y: 0,
-      r: 0,
-      doesBelong: 0
-    };
     this.drawPoint = this.drawPoint.bind(this);
     this.setPoint = this.setPoint.bind(this);
   }
@@ -25,16 +22,10 @@ class Graph extends Component {
     this.drawAxis();
     this.props.getAllPoints();
   }
-  
+
   componentDidUpdate() {
     this.drawFigures();
     this.drawAxis();
-  }
-
-  updateCoordinatesFromParent(x, y, r) {
-    this.state.x = x;
-    this.state.y = y;
-    this.state.r = r;
   }
 
   drawAxis() {
