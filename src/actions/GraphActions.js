@@ -1,5 +1,5 @@
-import { axios } from "axios";
 import { DEV_SERVER } from "../constants/routes";
+import { FILL_TABLE_FAIL, FILL_TABLE_SUCCESS } from "./PointsTableActions";
 export const DRAW_GRAPH = "DRAW_GRAPH";
 export const GET_ALL_POINTS_SUCCESS = "GET_ALL_POINTS_SUCCESS";
 export const GET_ALL_POINTS_FAIL = "GET_ALL_POINTS_FAIL";
@@ -15,7 +15,11 @@ export function getAllPoints() {
           type: GET_ALL_POINTS_SUCCESS,
           payload: response.data
         });
-        console.log(response);
+        dispatch({
+          type: FILL_TABLE_SUCCESS,
+          payload: response.data
+        });
+        console.log(response)
       })
       .catch(function(error) {
         // handle error
@@ -23,11 +27,11 @@ export function getAllPoints() {
           type: GET_ALL_POINTS_FAIL,
           error: error.message
         });
-        console.log(error);
+        dispatch({
+          type: FILL_TABLE_FAIL,
+          error: error.message
+        });
       })
-      .then(function() {
-        // always executed
-      });
   };
 }
 
