@@ -78,6 +78,10 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   overflow-y: hidden;
   transition: 0.5s;
+  font-size: 12pt;
+  text-transform: uppercase;
+  color: whitesmoke;
+  letter-spacing: 3px;
 `;
 
 const OverlayContent = styled.div`
@@ -125,6 +129,7 @@ class Header extends Component {
             <OverlayContent>
               <p>Анисимова Мария</p>
               <p>группа P3210</p>
+              <p>вариант 28048</p>
             </OverlayContent>
           </Overlay>
         </MediaQuery>

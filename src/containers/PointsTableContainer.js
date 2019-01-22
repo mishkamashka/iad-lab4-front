@@ -6,13 +6,14 @@ import * as pointsTableActions from '../actions/PointsTableActions'
 
 class PointsTableContainer extends Component {
   render() {
-    const { pointsTable, pointsTableActions } = this.props;
-    return <PointsTable points={pointsTable.points} />;
+    const { pointsTable, inputForm, pointsTableActions } = this.props;
+    return <PointsTable points={pointsTable.points} radius={inputForm.radius} />;
   }
 }
 const mapStateToProps = store => {
   return {
-    pointsTable: store.pointsTable
+    pointsTable: store.pointsTable,
+    inputForm: store.inputForm
   };
 };
 

@@ -1,5 +1,5 @@
 import { DEV_SERVER } from "../constants/routes";
-import { CLEAR_TABLE_SUCCESS, CLEAR_TABLE_FAIL } from "./PointsTableActions";
+import { CLEAR_TABLE_SUCCESS, CLEAR_TABLE_FAIL, UPDATE_TABLE_RADIUS_SUCCESS, UPDATE_TABLE_RADIUS_FAIL } from "./PointsTableActions";
 
 export const SET_RADIUS = "SET_RADIUS";
 export const SET_X = "SET_X";
@@ -77,6 +77,26 @@ export function setRadius(radius) {
       type: SET_RADIUS,
       payload: radius
     });
+    // TODO: ОБНОВЛЯТЬ ТОЧКИ И НА ГРАФИКЕ!!!! запросом?
+    // ГРАФ УЖЕ ОБНОВЛЯЕТСЯ С НОВЫМИ ТОЧКАМИ??? КАК ЭТО ПРОИСХОДИТ??????????????
+    const axios = require("axios");
+    axios
+      .put(DEV_SERVER + "/points/" + radius.value)
+      .then(function(response) {
+        // handle success
+        dispatch({
+          type: UPDATE_TABLE_RADIUS_SUCCESS,
+          payload: radius
+        });
+        console.log(response)
+      })
+      .catch(function(error) {
+        // handle error
+        dispatch({
+          type: UPDATE_TABLE_RADIUS_FAIL,
+          error: error.message
+        });
+      })
   };
 }
 

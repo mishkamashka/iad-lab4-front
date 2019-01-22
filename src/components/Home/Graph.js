@@ -26,6 +26,7 @@ class Graph extends Component {
   componentDidUpdate() {
     this.drawFigures();
     this.drawAxis();
+    console.log("Graph обновился");
   }
 
   drawAxis() {

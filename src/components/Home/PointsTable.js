@@ -7,6 +7,9 @@ const PointsTableWrapper = styled.div`
 `;
 
 export default class PointsTable extends Component {
+  componentDidUpdate(){
+    console.log("PointsTable обновился")
+  }
   render() {
     const { points } = this.props;
     return (
@@ -18,17 +21,17 @@ export default class PointsTable extends Component {
             <div className="cell">R</div>
             <div className="cell">Result</div>
           </div>
-
-          {points.map(item => (
-            <div className="row" key={item.id}>
-              <div className="cell">{item.x}</div>
-              <div className="cell">{item.y}</div>
-              <div className="cell">{item.r}</div>
-              <div className="cell">
-                {item.inArea === true ? "true" : "false"}
+          {this.props.radius.value > 0 &&
+            points.map(item => (
+              <div className="row" key={item.id}>
+                <div className="cell">{item.x}</div>
+                <div className="cell">{item.y}</div>
+                <div className="cell">{item.r}</div>
+                <div className="cell">
+                  {item.inArea === true ? "true" : "false"}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </PointsTableWrapper>
     );
