@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-//TODO depends on where the server is
 const ServerURL = "localhost:9999";
 
 const GraphWrapper = styled.div`
@@ -15,7 +14,6 @@ class Graph extends Component {
     super(props);
 
     this.onClick = this.onClick.bind(this);
-    this.drawPoint = this.drawPoint.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +25,7 @@ class Graph extends Component {
   componentDidUpdate() {
     this.drawFigures();
     this.drawAxis();
+    this.drawPoints();
     console.log("Graph обновился");
   }
 
@@ -154,6 +153,27 @@ class Graph extends Component {
     }
   }
 
+  drawPoints() {
+    const context = this.refs.canvas.getContext("2d");
+    const graphWidth = this.refs.canvas.width;
+    const k = 40;
+    const { points } = this.props;
+    var i;
+
+    for (i = 0; i < points.length; i++) {
+      context.beginPath();
+      if (points[i].doesBelong) {
+        context.fillStyle = "Blue";
+      } else {
+        context.fillStyle = "Red";
+      }
+      context.arc(points[i].x, this.refs.canvas.width - points[i].y, 3, 0, 2 * Math.PI);
+      context.fill();
+    }
+
+
+  }
+
   // setPoint(e) {
   //   var canvas1 = document.getElementById("a");
   //   var rect = canvas1.getBoundingClientRect();
@@ -170,17 +190,6 @@ class Graph extends Component {
   //   doXYRequest(x, y);
   //   // todo: add doXYRequest here
   // }
-
-  drawPoint(context, x, y, doesBelong) {
-    context.beginPath();
-    if (doesBelong) {
-      context.fillStyle = "Blue";
-    } else {
-      context.fillStyle = "Red";
-    }
-    context.arc(x, this.refs.canvas.width - y, 3, 0, 2 * Math.PI);
-    context.fill();
-  }
 
 }
 export default Graph;
