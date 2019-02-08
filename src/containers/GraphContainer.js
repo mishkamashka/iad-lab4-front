@@ -9,7 +9,7 @@ class GraphContainer extends Component {
     const { graph, graphActions } = this.props;
     return (
       <div>
-        <Graph radius={graph.radius} points={graph.points} setPoint={graphActions.setPoint} getAllPoints={graphActions.getAllPoints} />
+        <Graph radius={graph.radius} points={graph.points} addPoint={graphActions.addPoint} getAllPoints={graphActions.getAllPoints} />
       </div>
     );
   }

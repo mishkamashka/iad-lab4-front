@@ -11,10 +11,12 @@ const GraphWrapper = styled.div`
 `;
 
 class Graph extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.drawPoint = this.drawPoint.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+    this.drawPoint = this.drawPoint.bind(this);
+  }
 
   componentDidMount() {
     this.drawFigures();
@@ -37,7 +39,7 @@ class Graph extends Component {
   }
 
   onClick(e) {
-    this.props.setPoint(e.x, e.y);
+    this.props.addPoint(e.x, e.y);
   }
 
   drawAxis() {

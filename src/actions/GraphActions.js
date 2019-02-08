@@ -70,6 +70,3 @@ export function drawGraph() {
   };
 }
 
-export function setPoint(x, y) {
-  console.log(x + ' ' + y);
-}
