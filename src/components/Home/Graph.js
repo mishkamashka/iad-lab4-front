@@ -11,11 +11,10 @@ const GraphWrapper = styled.div`
 `;
 
 class Graph extends Component {
-  constructor(props) {
-    super(props);
-    this.drawPoint = this.drawPoint.bind(this);
-    this.setPoint = this.setPoint.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.drawPoint = this.drawPoint.bind(this);
+  // }
 
   componentDidMount() {
     this.drawFigures();
@@ -27,6 +26,18 @@ class Graph extends Component {
     this.drawFigures();
     this.drawAxis();
     console.log("Graph обновился");
+  }
+
+  render() {
+    return (
+      <GraphWrapper>
+        <canvas id="a" ref="canvas" width={500} height={500} onClick={this.onClick}/>
+      </GraphWrapper>
+    );
+  }
+
+  onClick(e) {
+    this.props.setPoint(e.x, e.y);
   }
 
   drawAxis() {
@@ -141,22 +152,22 @@ class Graph extends Component {
     }
   }
 
-  setPoint(e) {
-    var canvas1 = document.getElementById("a");
-    var rect = canvas1.getBoundingClientRect();
-    var offset = (rect.width - canvas1.width) / 2 + 1;
-    var x = e.clientX - rect.left - offset;
-    var y = e.clientY - rect.top - offset;
-    var real_x = (x - canvas1.width / 2) / 40;
-    var real_y = -(y - canvas1.width / 2) / 40;
-    alert("aefea");
+  // setPoint(e) {
+  //   var canvas1 = document.getElementById("a");
+  //   var rect = canvas1.getBoundingClientRect();
+  //   var offset = (rect.width - canvas1.width) / 2 + 1;
+  //   var x = e.clientX - rect.left - offset;
+  //   var y = e.clientY - rect.top - offset;
+  //   var real_x = (x - canvas1.width / 2) / 40;
+  //   var real_y = -(y - canvas1.width / 2) / 40;
+  //   alert("aefea");
 
-    // TODO: remove this from here
-    this.drawPoint(this.refs.canvas.getContext("2d"), x, y, true);
-    // this.setState(real_x, real_y, this.state.r, 0);
-    doXYRequest(x, y);
-    // todo: add doXYRequest here
-  }
+  //   // TODO: remove this from here
+  //   this.drawPoint(this.refs.canvas.getContext("2d"), x, y, true);
+  //   // this.setState(real_x, real_y, this.state.r, 0);
+  //   doXYRequest(x, y);
+  //   // todo: add doXYRequest here
+  // }
 
   drawPoint(context, x, y, doesBelong) {
     context.beginPath();
@@ -169,13 +180,6 @@ class Graph extends Component {
     context.fill();
   }
 
-  render() {
-    return (
-      <GraphWrapper>
-        <canvas id="a" ref="canvas" width={500} height={500} />
-      </GraphWrapper>
-    );
-  }
 }
 export default Graph;
 
