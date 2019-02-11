@@ -24,8 +24,8 @@ class Graph extends Component {
   }
 
   componentDidUpdate() {
-    // this.drawFigures();
-    // this.drawAxis();
+    this.drawFigures();
+    this.drawAxis();
     // this.drawPoints();
     console.log("Graph обновился");
   }
