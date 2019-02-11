@@ -20,25 +20,67 @@ class Graph extends Component {
     this.drawFigures();
     this.drawAxis();
     this.props.getAllPoints();
+    this.drawPoints();
   }
 
   componentDidUpdate() {
-    this.drawFigures();
-    this.drawAxis();
-    this.drawPoints();
+    // this.drawFigures();
+    // this.drawAxis();
+    // this.drawPoints();
     console.log("Graph обновился");
   }
 
   render() {
     return (
       <GraphWrapper>
-        <canvas id="a" ref="canvas" width={500} height={500} onClick={this.onClick}/>
+        <canvas id="a" ref="canvas" width={500} height={500} fill="white" onClick={this.onClick}/>
       </GraphWrapper>
     );
   }
 
   onClick(e) {
-    this.props.addPoint(e.x, e.y);
+
+    var x = e.clientX;
+    var y = e.clientY;
+
+    const context = this.refs.canvas.getContext("2d");
+    const graphWidth = this.refs.canvas.width;
+    const graphHeight = this.refs.canvas.height;
+    
+    const k = 40;
+    context.beginPath();
+          // context.arc(x - this.refs.canvas.offsetLeft, y - this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI); //draws point under click
+    context.arc(x - this.refs.canvas.offsetLeft, y - this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI);
+    // context.arc(x, y, 3, 0, 2 * Math.PI);
+    context.fill();
+
+    var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2) / k;
+    var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop)) / k;
+    console.log("x = ", graph_x, "y = ", graph_y);
+    console.log(y - this.refs.canvas.offsetTop);
+
+    this.props.addPoint(graph_x, graph_y);
+    // this.drawPoints();
+  }
+
+  drawPoints() {
+    const context = this.refs.canvas.getContext("2d");
+    const graphWidth = this.refs.canvas.width;
+    const graphHeight = this.refs.canvas.height;
+    const k = 40;
+    const { points } = this.props;
+    var i;
+
+    for (i = 0; i < points.length; i++) {
+      context.beginPath();
+      if (points[i].doesBelong) {
+        context.fillStyle = "Blue";
+      } else {
+        context.fillStyle = "Red";
+      }
+      context.arc(points[i].x * k + graphWidth / 2, points[i].y * k - graphHeight / 2, 3, 0, 2 * Math.PI);
+      context.fill();
+    }
   }
 
   drawAxis() {
@@ -151,27 +193,6 @@ class Graph extends Component {
       context.clearRect(0, 0, this.refs.canvas.width, this.refs.canvas.height);
       // alert("Радиус должен быть больше 0");
     }
-  }
-
-  drawPoints() {
-    const context = this.refs.canvas.getContext("2d");
-    const graphWidth = this.refs.canvas.width;
-    const k = 40;
-    const { points } = this.props;
-    var i;
-
-    for (i = 0; i < points.length; i++) {
-      context.beginPath();
-      if (points[i].doesBelong) {
-        context.fillStyle = "Blue";
-      } else {
-        context.fillStyle = "Red";
-      }
-      context.arc(points[i].x, this.refs.canvas.width - points[i].y, 3, 0, 2 * Math.PI);
-      context.fill();
-    }
-
-
   }
 
   // setPoint(e) {
