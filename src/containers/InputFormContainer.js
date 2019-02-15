@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import InputForm from "../components/Home/InputForm";
 import * as inputFormActions from "../actions/InputFormActions";
 import { bindActionCreators } from "redux";
+import * as  graphActions from "../actions/GraphActions"
 
 class InputFormContainer extends Component {
   render() {
-    const { inputForm, inputFormActions } = this.props;
+    const { inputForm, inputFormActions, graphActions } = this.props;
     return (
       <InputForm
         inputForm={inputForm}
@@ -16,6 +17,7 @@ class InputFormContainer extends Component {
         showAlert={inputFormActions.showAlert}
         checkFormPoint={inputFormActions.checkFormPoint}
         clearPointsList={inputFormActions.clearPointsList}
+        getAllPoints = {graphActions.getAllPoints}
       />
     );
   }
@@ -28,7 +30,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    inputFormActions: bindActionCreators(inputFormActions, dispatch)
+    inputFormActions: bindActionCreators(inputFormActions, dispatch),
+    graphActions: bindActionCreators(graphActions, dispatch)
     // setX: x => dispatch(setX(x)),
   };
 };

@@ -1,5 +1,7 @@
 import { DEV_SERVER } from "../constants/routes";
 import { CLEAR_TABLE_SUCCESS, CLEAR_TABLE_FAIL, UPDATE_TABLE_RADIUS_SUCCESS, UPDATE_TABLE_RADIUS_FAIL } from "./PointsTableActions";
+import { ADD_POINT_FAIL, GET_ALL_POINTS_FAIL, GET_ALL_POINTS_SUCCESS } from "./GraphActions";
+import { FILL_TABLE_FAIL, FILL_TABLE_SUCCESS } from "./PointsTableActions";
 
 export const SET_RADIUS = "SET_RADIUS";
 export const SET_X = "SET_X";
@@ -11,10 +13,23 @@ export const CLEAR_POINTS_LIST_FAIL = "CLEAR_POINTS_LIST_FAIL";
 
 export function checkFormPoint(x, y, r) {
   return dispatch => {
-    dispatch({
-      type: CHECK_POINT_SUCCESS,
-      payload: { x: x, y: y, r: r, status: "success" }
-    });
+    const axios = require("axios");
+    axios //TODO another request for putting valid "inArea" result in table
+      .post(DEV_SERVER + "/points/", {
+          x: x,
+          y: y,
+          r: r
+      })
+      .then(function(response) {
+        //success
+        this.props.getAllPoints();
+      })
+      .catch(function(error) {
+        dispatch({
+          type: ADD_POINT_FAIL,
+          error: error.message
+        })
+      })
   };
 }
 
