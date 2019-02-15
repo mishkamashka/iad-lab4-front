@@ -22,7 +22,32 @@ export function checkFormPoint(x, y, r) {
       })
       .then(function(response) {
         //success
-        this.props.getAllPoints();
+        axios
+      .get(DEV_SERVER + "/points/all")
+      .then(function(response) {
+        // handle success
+        dispatch({
+          type: GET_ALL_POINTS_SUCCESS,
+          payload: response.data
+        });
+        dispatch({
+          type: FILL_TABLE_SUCCESS,
+          payload: response.data
+        });
+        console.log(response)
+      })
+      .catch(function(error) {
+        // handle error
+        dispatch({
+          type: GET_ALL_POINTS_FAIL,
+          error: error.message
+        });
+        dispatch({
+          type: FILL_TABLE_FAIL,
+          error: error.message
+        });
+      })
+        // this.props.getAllPoints();
       })
       .catch(function(error) {
         dispatch({

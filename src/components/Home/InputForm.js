@@ -91,11 +91,15 @@ class InputForm extends Component {
   }
 
   onClickSendData(e) {
+    if (this.props.inputForm.radius.value > 0) {
     this.props.checkFormPoint(
       this.props.inputForm.x.value,
       this.props.inputForm.y,
       this.props.inputForm.radius.value
     );
+    }
+    else
+      alert("Invalid radius");
   }
 
   onClickClearList(e) {
