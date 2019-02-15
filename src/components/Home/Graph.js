@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 const GraphWrapper = styled.div`
   padding-top: 80px;
@@ -24,20 +23,19 @@ class Graph extends Component {
   componentDidUpdate() {
     this.drawFigures();
     this.drawAxis();
-    // this.drawPoints();
+    this.drawPoints();
     console.log("Graph обновился");
   }
 
   render() {
     return (
       <GraphWrapper>
-        <canvas id="a" ref="canvas" width={500} height={500} fill="white" onClick={this.onClick}/>
+        <canvas id="a" ref="canvas" width={500} height={500} onClick={this.onClick}/>
       </GraphWrapper>
     );
   }
 
   onClick(e) {
-
     var x = e.clientX;
     var y = e.clientY;
 
@@ -57,11 +55,11 @@ class Graph extends Component {
     console.log("x = ", graph_x, "y = ", graph_y);
     console.log(y - this.refs.canvas.offsetTop);
 
-    this.props.addPoint(graph_x, graph_y);
-    // this.drawPoints();
+    this.props.addPoint(graph_x, graph_y, this.props.radius.value);
   }
 
   drawPoints() {
+    var radius = this.props.radius.value;
     const context = this.refs.canvas.getContext("2d");
     const graphWidth = this.refs.canvas.width;
     const graphHeight = this.refs.canvas.height;
@@ -69,16 +67,28 @@ class Graph extends Component {
     const { points } = this.props;
     var i;
 
+    if (radius > 0) {
     for (i = 0; i < points.length; i++) {
       context.beginPath();
-      if (points[i].doesBelong) {
+      if (points[i].inArea) {
         context.fillStyle = "Blue";
       } else {
         context.fillStyle = "Red";
       }
-      context.arc(points[i].x * k + graphWidth / 2, points[i].y * k - graphHeight / 2, 3, 0, 2 * Math.PI);
+      context.arc(points[i].x * k + graphWidth / 2, - points[i].y * k + graphHeight / 2, 3, 0, 2 * Math.PI);
       context.fill();
+      context.closePath();
+
+      // context.arc(x - this.refs.canvas.offsetLeft, y - this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI); //click
+      // var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2) / k; + this.refs.canvas.offsetLeft
+      // var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop)) / k; this.refs.canvas.offsetTop
+
+
+      // context.arc(points[i].x * k + graphWidth / 2 + this.refs.canvas.offsetLeft, - points[i].y * k + graphHeight / 2 + this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI);
+      // context.fill();
     }
+    
+  }
   }
 
   drawAxis() {
@@ -192,23 +202,5 @@ class Graph extends Component {
       // alert("Радиус должен быть больше 0");
     }
   }
-
-  // setPoint(e) {
-  //   var canvas1 = document.getElementById("a");
-  //   var rect = canvas1.getBoundingClientRect();
-  //   var offset = (rect.width - canvas1.width) / 2 + 1;
-  //   var x = e.clientX - rect.left - offset;
-  //   var y = e.clientY - rect.top - offset;
-  //   var real_x = (x - canvas1.width / 2) / 40;
-  //   var real_y = -(y - canvas1.width / 2) / 40;
-  //   alert("aefea");
-
-  //   // TODO: remove this from here
-  //   this.drawPoint(this.refs.canvas.getContext("2d"), x, y, true);
-  //   // this.setState(real_x, real_y, this.state.r, 0);
-  //   doXYRequest(x, y);
-  //   // todo: add doXYRequest here
-  // }
-
 }
 export default Graph;
