@@ -17,7 +17,7 @@ export function addPoint(x, y, r) {
       })
       .then(function(response) {
         // handle success
-          // getAllPoints();
+          getAllPoints();
 
       axios
       .get(DEV_SERVER + "/points/all")

@@ -36,26 +36,25 @@ class Graph extends Component {
   }
 
   onClick(e) {
+    if (this.props.radius.value > 0) {
     var x = e.clientX;
     var y = e.clientY;
 
-    const context = this.refs.canvas.getContext("2d");
     const graphWidth = this.refs.canvas.width;
     const graphHeight = this.refs.canvas.height;
-    
     const k = 40;
-    context.beginPath();
-          // context.arc(x - this.refs.canvas.offsetLeft, y - this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI); //draws point under click
-    context.arc(x - this.refs.canvas.offsetLeft, y - this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI);
-    // context.arc(x, y, 3, 0, 2 * Math.PI);
-    context.fill();
 
-    var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2) / k;
-    var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop)) / k;
+    var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2 - this.refs.canvas.scrollLeft) / k;
+    var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop) + this.refs.canvas.scrollTop) / k;
+
+    // var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2) / k;
+    // var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop)) / k;
     console.log("x = ", graph_x, "y = ", graph_y);
     console.log(y - this.refs.canvas.offsetTop);
 
     this.props.addPoint(graph_x, graph_y, this.props.radius.value);
+    } else
+      alert("Set valid radius");
   }
 
   drawPoints() {
@@ -75,19 +74,11 @@ class Graph extends Component {
       } else {
         context.fillStyle = "Red";
       }
+      
       context.arc(points[i].x * k + graphWidth / 2, - points[i].y * k + graphHeight / 2, 3, 0, 2 * Math.PI);
       context.fill();
       context.closePath();
-
-      // context.arc(x - this.refs.canvas.offsetLeft, y - this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI); //click
-      // var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2) / k; + this.refs.canvas.offsetLeft
-      // var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop)) / k; this.refs.canvas.offsetTop
-
-
-      // context.arc(points[i].x * k + graphWidth / 2 + this.refs.canvas.offsetLeft, - points[i].y * k + graphHeight / 2 + this.refs.canvas.offsetTop, 3, 0, 2 * Math.PI);
-      // context.fill();
-    }
-    
+    } 
   }
   }
 

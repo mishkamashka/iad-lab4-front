@@ -118,22 +118,55 @@ export function setRadius(radius) {
       payload: radius
     });
     // TODO: ОБНОВЛЯТЬ ТОЧКИ И НА ГРАФИКЕ!!!! запросом?
-    // ГРАФ УЖЕ ОБНОВЛЯЕТСЯ С НОВЫМИ ТОЧКАМИ??? КАК ЭТО ПРОИСХОДИТ??????????????
+    // ГРАФ УЖЕ ОБНОВЛЯЕТСЯ С НОВЫМИ ТОЧКАМИ??? КАК ЭТО ПРОИСХОДИТ?????????????? обновляется, но со старыми
     const axios = require("axios");
     axios
       .put(DEV_SERVER + "/points/" + radius.value)
       .then(function(response) {
         // handle success
-        dispatch({
-          type: UPDATE_TABLE_RADIUS_SUCCESS,
-          payload: radius
-        });
+        getAllPoints();
+        // dispatch({
+        //   type: UPDATE_TABLE_RADIUS_SUCCESS,
+        //   payload: radius
+        // });
         console.log(response)
       })
       .catch(function(error) {
         // handle error
         dispatch({
           type: UPDATE_TABLE_RADIUS_FAIL,
+          error: error.message
+        });
+      })
+  };
+}
+
+export function getAllPoints() {
+  return dispatch => {
+    console.log('get points');
+    const axios = require("axios");
+    axios
+      .get(DEV_SERVER + "/points/all")
+      .then(function(response) {
+        // handle success
+        dispatch({
+          type: GET_ALL_POINTS_SUCCESS,
+          payload: response.data
+        });
+        dispatch({
+          type: FILL_TABLE_SUCCESS,
+          payload: response.data
+        });
+        console.log(response)
+      })
+      .catch(function(error) {
+        // handle error
+        dispatch({
+          type: GET_ALL_POINTS_FAIL,
+          error: error.message
+        });
+        dispatch({
+          type: FILL_TABLE_FAIL,
           error: error.message
         });
       })
