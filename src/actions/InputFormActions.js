@@ -1,6 +1,15 @@
 import { DEV_SERVER } from "../constants/routes";
-import { CLEAR_TABLE_SUCCESS, CLEAR_TABLE_FAIL, UPDATE_TABLE_RADIUS_SUCCESS, UPDATE_TABLE_RADIUS_FAIL } from "./PointsTableActions";
-import { ADD_POINT_FAIL, GET_ALL_POINTS_FAIL, GET_ALL_POINTS_SUCCESS } from "./GraphActions";
+import {
+  CLEAR_TABLE_SUCCESS,
+  CLEAR_TABLE_FAIL,
+  UPDATE_TABLE_RADIUS_SUCCESS,
+  UPDATE_TABLE_RADIUS_FAIL
+} from "./PointsTableActions";
+import {
+  ADD_POINT_FAIL,
+  GET_ALL_POINTS_FAIL,
+  GET_ALL_POINTS_SUCCESS
+} from "./GraphActions";
 import { FILL_TABLE_FAIL, FILL_TABLE_SUCCESS } from "./PointsTableActions";
 
 export const SET_RADIUS = "SET_RADIUS";
@@ -16,45 +25,45 @@ export function checkFormPoint(x, y, r) {
     const axios = require("axios");
     axios //TODO another request for putting valid "inArea" result in table
       .post(DEV_SERVER + "/points/", {
-          x: x,
-          y: y,
-          r: r
+        x: x,
+        y: y,
+        r: r
       })
       .then(function(response) {
         //success
         axios
-      .get(DEV_SERVER + "/points/all")
-      .then(function(response) {
-        // handle success
-        dispatch({
-          type: GET_ALL_POINTS_SUCCESS,
-          payload: response.data
-        });
-        dispatch({
-          type: FILL_TABLE_SUCCESS,
-          payload: response.data
-        });
-        console.log(response)
-      })
-      .catch(function(error) {
-        // handle error
-        dispatch({
-          type: GET_ALL_POINTS_FAIL,
-          error: error.message
-        });
-        dispatch({
-          type: FILL_TABLE_FAIL,
-          error: error.message
-        });
-      })
+          .get(DEV_SERVER + "/points/all")
+          .then(function(response) {
+            // handle success
+            dispatch({
+              type: GET_ALL_POINTS_SUCCESS,
+              payload: response.data
+            });
+            dispatch({
+              type: FILL_TABLE_SUCCESS,
+              payload: response.data
+            });
+            console.log(response);
+          })
+          .catch(function(error) {
+            // handle error
+            dispatch({
+              type: GET_ALL_POINTS_FAIL,
+              error: error.message
+            });
+            dispatch({
+              type: FILL_TABLE_FAIL,
+              error: error.message
+            });
+          });
         // this.props.getAllPoints();
       })
       .catch(function(error) {
         dispatch({
           type: ADD_POINT_FAIL,
           error: error.message
-        })
-      })
+        });
+      });
   };
 }
 
@@ -124,12 +133,40 @@ export function setRadius(radius) {
       .put(DEV_SERVER + "/points/" + radius.value)
       .then(function(response) {
         // handle success
-        getAllPoints();
+        // getAllPoints();
+
+        const axios = require("axios");
+        axios
+          .get(DEV_SERVER + "/points/all")
+          .then(function(response) {
+            // handle success
+            dispatch({
+              type: GET_ALL_POINTS_SUCCESS,
+              payload: response.data
+            });
+            dispatch({
+              type: FILL_TABLE_SUCCESS,
+              payload: response.data
+            });
+            console.log(response);
+          })
+          .catch(function(error) {
+            // handle error
+            dispatch({
+              type: GET_ALL_POINTS_FAIL,
+              error: error.message
+            });
+            dispatch({
+              type: FILL_TABLE_FAIL,
+              error: error.message
+            });
+          });
+
         // dispatch({
         //   type: UPDATE_TABLE_RADIUS_SUCCESS,
         //   payload: radius
         // });
-        console.log(response)
+        console.log(response);
       })
       .catch(function(error) {
         // handle error
@@ -137,13 +174,13 @@ export function setRadius(radius) {
           type: UPDATE_TABLE_RADIUS_FAIL,
           error: error.message
         });
-      })
+      });
   };
 }
 
 export function getAllPoints() {
   return dispatch => {
-    console.log('get points');
+    console.log("get points");
     const axios = require("axios");
     axios
       .get(DEV_SERVER + "/points/all")
@@ -157,7 +194,7 @@ export function getAllPoints() {
           type: FILL_TABLE_SUCCESS,
           payload: response.data
         });
-        console.log(response)
+        console.log(response);
       })
       .catch(function(error) {
         // handle error
@@ -169,7 +206,7 @@ export function getAllPoints() {
           type: FILL_TABLE_FAIL,
           error: error.message
         });
-      })
+      });
   };
 }
 
