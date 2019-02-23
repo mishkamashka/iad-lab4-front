@@ -37,21 +37,14 @@ class Graph extends Component {
 
   onClick(e) {
     if (this.props.radius.value > 0) {
-    var x = e.clientX;
-    var y = e.clientY;
-
+    var x = e.pageX;
+    var y = e.pageY;
     const graphWidth = this.refs.canvas.width;
     const graphHeight = this.refs.canvas.height;
     const k = 40;
 
-    var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2 - this.refs.canvas.scrollLeft) / k;
-    var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop) + this.refs.canvas.scrollTop) / k;
-
-    // var graph_x = ((x - this.refs.canvas.offsetLeft) - graphWidth / 2) / k;
-    // var graph_y = (graphHeight / 2 - (y - this.refs.canvas.offsetTop)) / k;
-    console.log("x = ", graph_x, "y = ", graph_y);
-    console.log(y - this.refs.canvas.offsetTop);
-
+    var graph_x = - (graphWidth / 2 + this.refs.canvas.offsetLeft - x) / k;
+    var graph_y = (graphHeight / 2 + this.refs.canvas.offsetTop - y) / k;
     this.props.addPoint(graph_x, graph_y, this.props.radius.value);
     } else
       alert("Set valid radius");
