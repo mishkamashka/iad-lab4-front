@@ -10,11 +10,14 @@ import * as ROUTES from "./constants/routes";
 import SignIn from "./components/signin";
 import SignUp from "./components/signup";
 import Home from "./components/home";
+import SignInContainer from './containers/AuthContainer'
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import styled from "styled-components";
 import NotFoundPage from "./components/error/NotFound";
+import PrivateRoute from "./routes/PrivateRoute";
+
 
 const AppWrapper = styled.div`
   height: 100%;
@@ -26,9 +29,9 @@ class App extends Component {
       <Router>
         <AppWrapper>
           <Switch>
-            <Route exact path={ROUTES.HOME} component={Home} />
+            <PrivateRoute exact path={ROUTES.HOME} component={Home} />
             <Route path={ROUTES.SIGNUP} component={SignUp} />
-            <Route path={ROUTES.SIGNIN} component={SignIn} />
+            <Route path={ROUTES.SIGNIN} component={SignInContainer} />
             <Route component={NotFoundPage} />
           </Switch>
         </AppWrapper>
