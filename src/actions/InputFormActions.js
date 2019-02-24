@@ -1,4 +1,4 @@
-import { DEV_SERVER } from "../constants/routes";
+import { DEV_SERVER } from "../routes/routes";
 import {
   CLEAR_TABLE_SUCCESS,
   CLEAR_TABLE_FAIL,

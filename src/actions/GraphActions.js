@@ -1,4 +1,4 @@
-import { DEV_SERVER } from "../constants/routes";
+import { DEV_SERVER } from "../routes/routes";
 import { FILL_TABLE_FAIL, FILL_TABLE_SUCCESS } from "./PointsTableActions";
 export const DRAW_GRAPH = "DRAW_GRAPH";
 export const GET_ALL_POINTS_SUCCESS = "GET_ALL_POINTS_SUCCESS";

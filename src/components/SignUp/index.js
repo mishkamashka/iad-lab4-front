@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import * as ROUTES from "../../constants/routes";
+import * as ROUTES from "../../routes/routes";
 import { Link } from "react-router-dom";
 import Header from "../util/Header";
 import Footer from "../util/Footer";

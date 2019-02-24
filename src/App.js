@@ -6,7 +6,7 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
-import * as ROUTES from "./constants/routes";
+import * as ROUTES from "./routes/routes";
 import SignIn from "./components/signin";
 import SignUp from "./components/signup";
 import Home from "./components/home";
