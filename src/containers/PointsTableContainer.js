@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import PointsTable from "../components/Home/PointsTable";
+import PointsTable from "../components/home/PointsTable";
 import * as pointsTableActions from '../actions/PointsTableActions'
 
 class PointsTableContainer extends Component {

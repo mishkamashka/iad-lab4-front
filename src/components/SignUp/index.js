@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
+import Header from "../util/Header";
+import Footer from "../util/Footer";
 
 const SignUpWrapper = styled.div`
   display: grid;
@@ -71,8 +73,6 @@ const Button = styled.button`
   @media all and (max-width: 759px) {
     grid-column: 2 / span 4;
   }
-
-
 `;
 
 const Input = styled.input`
@@ -112,24 +112,28 @@ class SignUp extends Component {
 
   render() {
     return (
-      <SignUpWrapper>
-        <Input
-          name="login"
-          value={this.state.login}
-          onChange={this.handleChange}
-          placeholder="Login: "
-        />
-        <Input
-          name="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-          placeholder="Password: "
-        />
-        <Button onClick={this.handleClick}>Зарегистироваться</Button>
-        <Button>
-          <Link to={ROUTES.SIGNIN}>Уже зарегистрированы?</Link>
-        </Button>
-      </SignUpWrapper>
+      <div>
+        <Header/>
+        <SignUpWrapper>
+          <Input
+            name="login"
+            value={this.state.login}
+            onChange={this.handleChange}
+            placeholder="Login: "
+          />
+          <Input
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            placeholder="Password: "
+          />
+          <Button onClick={this.handleClick}>Зарегистироваться</Button>
+          <Button>
+            <Link to={ROUTES.SIGNIN}>Уже зарегистрированы?</Link>
+          </Button>
+        </SignUpWrapper>
+        <Footer/>
+      </div>
     );
   }
 }

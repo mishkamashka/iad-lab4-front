@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Graph from "../components/Home/Graph";
+import Graph from "../components/home/Graph";
 import { bindActionCreators } from "redux";
 import * as graphActions from "../actions/GraphActions";
 

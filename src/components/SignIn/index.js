@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import * as ROUTES from "../../constants/routes";
 import { Link } from "react-router-dom";
-import Header from "../StudyComponents/Header";
-import Footer from "../StudyComponents/Footer";
+import Header from "../util/Header";
+import Footer from "../util/Footer";
 
 const SignInWrapper = styled.div`
   display: grid;

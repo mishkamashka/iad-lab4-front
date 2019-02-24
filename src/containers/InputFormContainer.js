@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import InputForm from "../components/Home/InputForm";
+import InputForm from "../components/home/InputForm";
 import * as inputFormActions from "../actions/InputFormActions";
 import { bindActionCreators } from "redux";
 import * as  graphActions from "../actions/GraphActions"

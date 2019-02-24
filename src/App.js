@@ -7,14 +7,12 @@ import {
   Switch
 } from "react-router-dom";
 import * as ROUTES from "./constants/routes";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import Home from "./components/Home";
+import SignIn from "./components/signin";
+import SignUp from "./components/signup";
+import Home from "./components/home";
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import Header from "./components/StudyComponents/Header";
-import Footer from "./components/StudyComponents/Footer";
 import styled from "styled-components";
 import NotFoundPage from "./components/error/NotFound";
 
