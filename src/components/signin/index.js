@@ -30,29 +30,39 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     // this.login = this.login.bind(this);
   }
 
   login = () => {
-    alert('aef')
-      // real logic is here
-    fakeAuth.authenticate(() => {
-      this.props.signin();
-      // in this action we are only setting isAuth state in redux ^_^
-      // придумать, как отправлять состояния о логине в редакс и его уже там хранить
-      this.setState({ redirectToReferrer: true });
-    });
+    // real logic is here
+    if (this.props.login != "" && this.props.password != "") {
+      fakeAuth.authenticate(() => {
+        this.props.signin(this.props.login, this.props.password);
+        // in this action we are only setting isAuth state in redux ^_^
+        // придумать, как отправлять состояния о логине в редакс и его уже там хранить
+        this.setState({ redirectToReferrer: true });
+      });
+    } else alert("Enter login and password");
   };
 
-  handleChange(event) {
+  handlePasswordChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
+    this.props.setPassword(event.target.value);
+  }
+
+  handleLoginChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+    this.props.setLogin(event.target.value);
   }
 
   render() {
-    // 
+    //
     if (this.props.isAuthenticated) {
       return <Redirect to={ROUTES.HOME} />;
     }
@@ -65,13 +75,13 @@ class SignIn extends Component {
             <Input
               name="login"
               value={this.props.login}
-              onChange={this.handleChange}
+              onChange={this.handleLoginChange}
               placeholder="Login: "
             />
             <Input
               name="password"
               value={this.props.password}
-              onChange={this.handleChange}
+              onChange={this.handlePasswordChange}
               placeholder="Password: "
             />
             <Button onClick={this.login}>Войти</Button>

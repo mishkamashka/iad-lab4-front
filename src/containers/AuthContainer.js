@@ -14,6 +14,8 @@ class AuthContainer extends Component {
         password={auth.password}
         signin={authActions.signin}
         isAuthenticated={auth.isAuthenticated}
+        setLogin={authActions.setLogin}
+        setPassword={authActions.setPassword}
       />
     );
   }

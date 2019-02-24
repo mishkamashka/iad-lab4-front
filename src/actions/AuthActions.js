@@ -2,13 +2,15 @@ import { DEV_SERVER } from "../routes/routes";
 
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const SET_LOGIN = "SET_LOGIN";
+export const SET_PASSWORD = "SET_PASSWORD";
 
-export function signin() {
+export function signin(username, password) {
   return function(dispatch) {
     const axios = require("axios");
     var bodyFormData = new FormData();
-    bodyFormData.set("username", "mariia");
-    bodyFormData.set("password", "mariia");
+    bodyFormData.set("username", username);
+    bodyFormData.set("password", password);
 
     axios({
       method: "post",
@@ -42,4 +44,22 @@ export function signout() {
       payload: false
     });
   };
+}
+
+export function setLogin(login) {
+  return dispatch => {
+    dispatch({
+      type: SET_LOGIN,
+      payload: login
+    })
+  }
+}
+
+export function setPassword(password) {
+  return dispatch => {
+    dispatch({
+      type: SET_PASSWORD,
+      payload: password
+    })
+  }
 }

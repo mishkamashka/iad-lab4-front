@@ -26,7 +26,7 @@ class PrivateRoute extends React.Component {
   }
 }
 
-// IT doesn't work as espected!
+// IT doesn't work as expected!
 const mapStateToProps = store => {
   return {
     auth: store.auth
