@@ -23,6 +23,7 @@ export function signin(username, password) {
           type: AUTH_SUCCESS,
           payload: true
         });
+        console.log(response.headers);
         //handle success
         console.log(response);
       })
