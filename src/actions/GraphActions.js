@@ -1,5 +1,6 @@
 import { DEV_SERVER } from "../routes/routes";
 import { FILL_TABLE_FAIL, FILL_TABLE_SUCCESS } from "./PointsTableActions";
+import Cookies from 'js-cookie'
 export const DRAW_GRAPH = "DRAW_GRAPH";
 export const GET_ALL_POINTS_SUCCESS = "GET_ALL_POINTS_SUCCESS";
 export const GET_ALL_POINTS_FAIL = "GET_ALL_POINTS_FAIL";
@@ -59,9 +60,10 @@ export function addPoint(x, y, r) {
 
 export function getAllPoints() {
   return dispatch => {
+    var access_token = Cookies.get('access_token');
     const axios = require("axios");
     axios
-      .get(DEV_SERVER + "/points/all")
+      .get(DEV_SERVER + "/points/all",  { headers: {"Authorization" : `Bearer ${access_token}`} })
       .then(function(response) {
         // handle success
         dispatch({
