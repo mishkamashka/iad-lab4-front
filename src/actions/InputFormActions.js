@@ -136,8 +136,7 @@ export function setRadius(radius) {
     const axios = require("axios");
     var access_token = Cookies.get("access_token");
     axios
-      .put(DEV_SERVER + "/points/", radius.value, {
-        headers: { Authorization: `Bearer ${access_token}` }
+      .put( DEV_SERVER + "/points/" + radius.value, {}, {headers: { Authorization: `Bearer ${access_token}` }
       })
       .then(function(response) {
         // handle success
