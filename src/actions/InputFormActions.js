@@ -11,6 +11,7 @@ import {
   GET_ALL_POINTS_SUCCESS
 } from "./GraphActions";
 import { FILL_TABLE_FAIL, FILL_TABLE_SUCCESS } from "./PointsTableActions";
+import Cookies from "js-cookie";
 
 export const SET_RADIUS = "SET_RADIUS";
 export const SET_X = "SET_X";
@@ -23,16 +24,19 @@ export const CLEAR_POINTS_LIST_FAIL = "CLEAR_POINTS_LIST_FAIL";
 export function checkFormPoint(x, y, r) {
   return dispatch => {
     const axios = require("axios");
+    var access_token = Cookies.get("access_token");
     axios //TODO another request for putting valid "inArea" result in table
-      .post(DEV_SERVER + "/points/", {
-        x: x,
-        y: y,
-        r: r
-      })
+      .post(
+        DEV_SERVER + "/points/",
+        { x: x, y: y, r: r },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      )
       .then(function(response) {
         //success
         axios
-          .get(DEV_SERVER + "/points/all")
+          .get(DEV_SERVER + "/points/all", {
+            headers: { Authorization: `Bearer ${access_token}` }
+          })
           .then(function(response) {
             // handle success
             dispatch({
@@ -70,8 +74,11 @@ export function checkFormPoint(x, y, r) {
 export function clearPointsList() {
   return dispatch => {
     const axios = require("axios");
+    var access_token = Cookies.get("access_token");
     axios
-      .get(DEV_SERVER + "/points/deleteAll")
+      .get(DEV_SERVER + "/points/deleteAll", {
+        headers: { Authorization: `Bearer ${access_token}` }
+      })
       .then(function(response) {
         // handle success
         dispatch({
@@ -126,18 +133,21 @@ export function setRadius(radius) {
       type: SET_RADIUS,
       payload: radius
     });
-    // TODO: ОБНОВЛЯТЬ ТОЧКИ И НА ГРАФИКЕ!!!! запросом?
-    // ГРАФ УЖЕ ОБНОВЛЯЕТСЯ С НОВЫМИ ТОЧКАМИ??? КАК ЭТО ПРОИСХОДИТ?????????????? обновляется, но со старыми
     const axios = require("axios");
+    var access_token = Cookies.get("access_token");
     axios
-      .put(DEV_SERVER + "/points/" + radius.value)
+      .put(DEV_SERVER + "/points/", radius.value, {
+        headers: { Authorization: `Bearer ${access_token}` }
+      })
       .then(function(response) {
         // handle success
         // getAllPoints();
 
         const axios = require("axios");
         axios
-          .get(DEV_SERVER + "/points/all")
+          .get(DEV_SERVER + "/points/all", {
+            headers: { Authorization: `Bearer ${access_token}` }
+          })
           .then(function(response) {
             // handle success
             dispatch({
@@ -161,11 +171,6 @@ export function setRadius(radius) {
               error: error.message
             });
           });
-
-        // dispatch({
-        //   type: UPDATE_TABLE_RADIUS_SUCCESS,
-        //   payload: radius
-        // });
         console.log(response);
       })
       .catch(function(error) {
@@ -181,9 +186,12 @@ export function setRadius(radius) {
 export function getAllPoints() {
   return dispatch => {
     console.log("get points");
+    var access_token = Cookies.get("access_token");
     const axios = require("axios");
     axios
-      .get(DEV_SERVER + "/points/all")
+      .get(DEV_SERVER + "/points/all", {
+        headers: { Authorization: `Bearer ${access_token}` }
+      })
       .then(function(response) {
         // handle success
         dispatch({
