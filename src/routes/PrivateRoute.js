@@ -6,36 +6,27 @@ import { bindActionCreators } from "redux";
 import * as authActions from "../actions/AuthActions";
 import Cookies from "js-cookie";
 import { DEV_SERVER } from "../routes/routes";
-import {withRouter} from 'react-router-dom'
+import { withRouter } from "react-router-dom";
 class PrivateRoute extends React.Component {
-  
-  componentWillMount()  {
-    const axios = require("axios");
-    var access_token = Cookies.get("access_token");
-    axios
-      .get(DEV_SERVER + "/check", {
-        headers: { Authorization: `Bearer ${access_token}` }
-      })
-      .then(response => {
-        Cookies.set('isAuthenticated', true)
-        // this.setState({ isAuthenticated: true });
-        //this.setState({name: response.data.name});
-      })
-      .catch(error => {
-        Cookies.set('isAuthenticated', false)
-        // this.setState({
-        //   isAuthenticated: false
-        // }); // handle error
-      });
+  componentWillMount() {
+    this.props.authActions.log();
   }
 
   render() {
     var Component = this.props.component;
-    var test = Cookies.get("isAuthenticated");
-    // if (test === true) {
-    //   return (
-    //     <Component/>
-    //   );
+
+    const { auth, isLoading, error } = this.props;
+
+    if (auth.error) {
+      return <p>{error.message}</p>;
+    }
+
+    if (auth.isLoading) {
+      return <p>Loading ...</p>;
+    }
+
+    // if (auth === true) {
+    //   return <Component />;
     // } else
     //   return (
     //     <Redirect
@@ -47,19 +38,22 @@ class PrivateRoute extends React.Component {
     return (
       <Route
         render={props =>
-          Cookies.get("isAuthenticated") === 'true' ? (
+          auth.auth ? (
             // <Redirect
             //   to={{
             //     pathname: "/"
             //   }}
             // />
             <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/signin"
-              }}
-            />
+          ) : 
+          
+          (
+            // <Redirect
+            //   to={{
+            //     pathname: "/signin"
+            //   }}
+            // />
+            <div>oh, wait</div>
           )
         }
       />
@@ -81,7 +75,9 @@ class PrivateRoute extends React.Component {
 // IT doesn't work as expected!
 const mapStateToProps = store => {
   return {
-    auth: store.auth
+    auth: store.auth,
+    isLoading: store.isLoading,
+    error: store.error
   };
 };
 
@@ -91,10 +87,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PrivateRoute));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PrivateRoute)
+);
 
 export const fakeAuth = {
   isAuthenticated: false,

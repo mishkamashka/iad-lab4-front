@@ -10,7 +10,6 @@ import Cookies from "js-cookie";
 const HomeWrapper = styled.div``;
 class Home extends Component {
   render() {
-    if (Cookies.get("isAuthenticated") === "false") this.props.history.push("/");
     return (
       <div>
         <Header />

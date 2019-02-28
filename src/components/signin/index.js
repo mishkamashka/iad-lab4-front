@@ -113,8 +113,8 @@ class SignIn extends Component {
       this.props.signin(this.props.login, this.props.password);
       // in this action we are only setting isAuth state in redux ^_^
       // придумать, как отправлять состояния о логине в редакс и его уже там хранить
-      this.setState({ redirectToReferrer: true });
       // });
+      this.props.history.push("/");
     } else alert("Enter login and password");
   };
 
@@ -134,16 +134,15 @@ class SignIn extends Component {
 
   render() {
     //
-    setTimeout(
-      function() {
-        if (Cookies.get("isAuthenticated") === "true")
-          this.props.history.push("/");
-      }.bind(this),
-      1
-    );
-    var isAuthenticated = Cookies.get("isAuthenticated");
-    if (isAuthenticated === "true") {
-      return <Redirect to={ROUTES.HOME} />;
+    // setTimeout(
+    //   function() {
+    //     if (Cookies.get("isAuthenticated") === "true")
+    //       this.props.history.push("/");
+    //   }.bind(this),
+    //   1
+    // );
+    if (this.props.auth === true) {
+      this.props.history.push("/");
     }
 
     return (

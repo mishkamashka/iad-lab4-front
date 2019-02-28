@@ -1,6 +1,14 @@
-import { AUTH_SUCCESS, AUTH_FAIL, SET_LOGIN, SET_PASSWORD } from "../actions/AuthActions";
+import {
+  AUTH_SUCCESS,
+  AUTH_FAIL,
+  AUTH_BEGIN,
+  SET_LOGIN,
+  SET_PASSWORD
+} from "../actions/AuthActions";
 const initialState = {
-  isAuthenticated: false,
+  auth: false,
+  isLoading: false,
+  error: null,
   login: "",
   password: ""
 };
@@ -10,11 +18,13 @@ export function authReducer(state = initialState, action) {
     case SET_LOGIN:
       return { ...state, login: action.payload };
     case SET_PASSWORD:
-      return { ...state, password: action.payload } 
+      return { ...state, password: action.payload };
+    case AUTH_BEGIN:
+      return { ...state, isLoading: true, error: null };
     case AUTH_SUCCESS:
-      return { ...state, isAuthenticated: action.payload };
+      return { ...state, isLoading: false, auth: action.payload };
     case AUTH_FAIL:
-      return { ...state, isAuthenticated: action.payload };
+      return { ...state, isLoading: false, auth: action.payload };
     default:
       return state;
   }
