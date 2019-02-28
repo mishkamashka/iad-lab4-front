@@ -132,8 +132,12 @@ class SignIn extends Component {
     this.props.setLogin(event.target.value);
   }
 
+  componentWillMount() {
+    this.props.subscribe();
+  }
+
   render() {
-    //
+        //
     // setTimeout(
     //   function() {
     //     if (Cookies.get("isAuthenticated") === "true")

@@ -109,7 +109,14 @@ export function log() {
         });
         console.log(error);
       });
-   
+  };
+}
+
+export function subscribe() {
+  return dispatch => {
+    dispatch({
+      type: "subscribe"
+    });
   };
 }
 

@@ -35,6 +35,9 @@ class PrivateRoute extends React.Component {
     //       }}
     //     />
     //   );
+    if (auth.auth === null) {
+      return <div>oh, wait...</div>;
+    }
     return (
       <Route
         render={props =>
@@ -45,15 +48,13 @@ class PrivateRoute extends React.Component {
             //   }}
             // />
             <Component {...props} />
-          ) : 
-          
-          (
-            // <Redirect
-            //   to={{
-            //     pathname: "/signin"
-            //   }}
-            // />
-            <div>oh, wait</div>
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/signin"
+              }}
+            />
+            // <div>oh, wait</div>
           )
         }
       />

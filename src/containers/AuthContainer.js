@@ -10,8 +10,10 @@ class AuthContainer extends Component {
     const { auth, authActions } = this.props;
     return (
       <SignIn
+        auth={auth}
         login={auth.login}
         password={auth.password}
+        subscribe={authActions.subscribe}
         signin={authActions.signin}
         isAuthenticated={auth.isAuthenticated}
         setLogin={authActions.setLogin}

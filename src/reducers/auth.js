@@ -6,7 +6,7 @@ import {
   SET_PASSWORD
 } from "../actions/AuthActions";
 const initialState = {
-  auth: false,
+  auth: null,
   isLoading: false,
   error: null,
   login: "",
@@ -25,6 +25,8 @@ export function authReducer(state = initialState, action) {
       return { ...state, isLoading: false, auth: action.payload };
     case AUTH_FAIL:
       return { ...state, isLoading: false, auth: action.payload };
+    case "subscribe":
+      return { ...state };
     default:
       return state;
   }
