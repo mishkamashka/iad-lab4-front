@@ -1,5 +1,6 @@
 import { DEV_SERVER } from "../routes/routes";
 import Cookies from "js-cookie";
+import history from "../components/util/history";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const SET_LOGIN = "SET_LOGIN";
@@ -38,9 +39,13 @@ export function signin(username, password) {
         var access_token = response.data.access_token;
         var expires_in = response.data.expires_in;
         console.log(response.headers);
-        Cookies.set("access_token", access_token, { expires: expires_in });
+        // What should i do here?
+        Cookies.set("access_token", access_token, {
+          expires: expires_in / 3600
+        });
+        Cookies.set("isAuthenticated", true);
         //handle success
-        console.log(response);
+        console.log(response + "Перемещаяюсь!");
       })
       .catch(function(error) {
         // handle error

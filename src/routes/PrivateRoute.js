@@ -6,16 +6,10 @@ import { bindActionCreators } from "redux";
 import * as authActions from "../actions/AuthActions";
 import Cookies from "js-cookie";
 import { DEV_SERVER } from "../routes/routes";
-
+import {withRouter} from 'react-router-dom'
 class PrivateRoute extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAuthenticated: false
-    };
-  }
-
-  componentDidMount() {
+  
+  componentWillMount()  {
     const axios = require("axios");
     var access_token = Cookies.get("access_token");
     axios
@@ -23,22 +17,37 @@ class PrivateRoute extends React.Component {
         headers: { Authorization: `Bearer ${access_token}` }
       })
       .then(response => {
-        this.setState({ isAuthenticated: true });
+        Cookies.set('isAuthenticated', true)
+        // this.setState({ isAuthenticated: true });
         //this.setState({name: response.data.name});
       })
       .catch(error => {
-        this.setState({
-          isAuthenticated: false
-        }); // handle error
+        Cookies.set('isAuthenticated', false)
+        // this.setState({
+        //   isAuthenticated: false
+        // }); // handle error
       });
   }
 
   render() {
     var Component = this.props.component;
+    var test = Cookies.get("isAuthenticated");
+    // if (test === true) {
+    //   return (
+    //     <Component/>
+    //   );
+    // } else
+    //   return (
+    //     <Redirect
+    //       to={{
+    //         pathname: "/signin"
+    //       }}
+    //     />
+    //   );
     return (
       <Route
         render={props =>
-          this.state.isAuthenticated ? (
+          Cookies.get("isAuthenticated") === 'true' ? (
             // <Redirect
             //   to={{
             //     pathname: "/"
@@ -82,10 +91,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(PrivateRoute);
+)(PrivateRoute));
 
 export const fakeAuth = {
   isAuthenticated: false,

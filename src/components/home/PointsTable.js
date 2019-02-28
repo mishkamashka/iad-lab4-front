@@ -7,9 +7,6 @@ const PointsTableWrapper = styled.div`
 `;
 
 export default class PointsTable extends Component {
-  componentDidUpdate(){
-    console.log("PointsTable обновился")
-  }
   render() {
     const { points } = this.props;
     return (

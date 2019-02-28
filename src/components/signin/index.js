@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 import Header from "../util/Header";
 import Footer from "../util/Footer";
 import { fakeAuth } from "../../routes/PrivateRoute";
-
+import Cookies from "js-cookie";
+import { withRouter } from "react-router-dom";
+import { DEV_SERVER } from "../../routes/routes";
 import {
   BrowserRouter as Router,
   Route,
@@ -107,12 +109,12 @@ class SignIn extends Component {
   login = () => {
     // real logic is here
     if (this.props.login != "" && this.props.password != "") {
-      fakeAuth.authenticate(() => {
-        this.props.signin(this.props.login, this.props.password);
-        // in this action we are only setting isAuth state in redux ^_^
-        // придумать, как отправлять состояния о логине в редакс и его уже там хранить
-        this.setState({ redirectToReferrer: true });
-      });
+      // fakeAuth.authenticate(() => {
+      this.props.signin(this.props.login, this.props.password);
+      // in this action we are only setting isAuth state in redux ^_^
+      // придумать, как отправлять состояния о логине в редакс и его уже там хранить
+      this.setState({ redirectToReferrer: true });
+      // });
     } else alert("Enter login and password");
   };
 
@@ -132,7 +134,15 @@ class SignIn extends Component {
 
   render() {
     //
-    if (this.props.isAuthenticated) {
+    setTimeout(
+      function() {
+        if (Cookies.get("isAuthenticated") === "true")
+          this.props.history.push("/");
+      }.bind(this),
+      1
+    );
+    var isAuthenticated = Cookies.get("isAuthenticated");
+    if (isAuthenticated === "true") {
       return <Redirect to={ROUTES.HOME} />;
     }
 
@@ -140,26 +150,26 @@ class SignIn extends Component {
       <div>
         <Header />
         <SignInWrapper>
-            <Input
-              name="login"
-              value={this.props.login}
-              onChange={this.handleLoginChange}
-              placeholder="Login: "
-            />
-            <Input
-              name="password"
-              value={this.props.password}
-              onChange={this.handlePasswordChange}
-              placeholder="Password: "
-            />
-            <Button onClick={this.login}>Войти</Button>
-            <Button>
-              <Link to={ROUTES.SIGNUP}>Зарегистрироваться</Link>
-            </Button>
+          <Input
+            name="login"
+            value={this.props.login}
+            onChange={this.handleLoginChange}
+            placeholder="Login: "
+          />
+          <Input
+            name="password"
+            value={this.props.password}
+            onChange={this.handlePasswordChange}
+            placeholder="Password: "
+          />
+          <Button onClick={this.login} />
+          <Button>
+            <Link to={ROUTES.SIGNUP}>Зарегистрироваться</Link>
+          </Button>
         </SignInWrapper>
         <Footer />
       </div>
     );
   }
 }
-export default SignIn;
+export default withRouter(SignIn);

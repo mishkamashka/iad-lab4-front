@@ -106,10 +106,6 @@ class InputForm extends Component {
     this.props.clearPointsList();
   }
 
-  componentDidUpdate() {
-    console.log("InputForm обновился")
-  }
-  
   render() {
     const xCoordinates = [
       { x: "-2", value: -2 },

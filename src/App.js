@@ -18,7 +18,6 @@ import styled from "styled-components";
 import NotFoundPage from "./components/error/NotFound";
 import PrivateRoute from "./routes/PrivateRoute";
 
-
 const AppWrapper = styled.div`
   height: 100%;
 `;
