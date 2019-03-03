@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Slider } from "primereact/slider";
 import { Dropdown } from "primereact/dropdown";
+import { Link } from "react-router-dom";
+
+import * as ROUTES from "../../routes/routes";
+import Cookies from "js-cookie";
 
 const InputFormWrapper = styled.div`
   padding-top: 30px;
@@ -25,6 +29,7 @@ const InputR = styled.div`
   grid-column: 3 / span 2;
   justify-self: center;
 `;
+
 const Button = styled.button`
   grid-column: 3 / span 2;
   justify-self: center;
@@ -66,6 +71,17 @@ const Button = styled.button`
     position: relative;
     bottom: -6px;
   }
+  a {
+    color: unset;
+  }
+  @media all and (min-width: 1192px) {
+    /* TODO: add something ? */
+  }
+  @media all and (min-width: 759px) and (max-width: 1192px) {
+  }
+  @media all and (max-width: 759px) {
+    grid-column: 2 / span 4;
+  }
 `;
 
 class InputForm extends Component {
@@ -104,6 +120,10 @@ class InputForm extends Component {
 
   onClickClearList(e) {
     this.props.clearPointsList();
+  }
+
+  logout(e) {
+    Cookies.remove("access_token");
   }
 
   render() {
@@ -161,6 +181,9 @@ class InputForm extends Component {
         </InputR>
         <Button onClick={this.onClickSendData}>check</Button>
         <Button onClick={this.onClickClearList}>clear</Button>
+        <Button onClick={this.logout}>
+            <Link to={ROUTES.SIGNIN}>log out</Link>
+        </Button>
       </InputFormWrapper>
     );
   }

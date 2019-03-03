@@ -107,13 +107,8 @@ class SignIn extends Component {
   }
 
   login = () => {
-    // real logic is here
     if (this.props.login != "" && this.props.password != "") {
-      // fakeAuth.authenticate(() => {
       this.props.signin(this.props.login, this.props.password);
-      // in this action we are only setting isAuth state in redux ^_^
-      // придумать, как отправлять состояния о логине в редакс и его уже там хранить
-      // });
       this.props.history.push("/");
     } else alert("Enter login and password");
   };
@@ -137,14 +132,6 @@ class SignIn extends Component {
   }
 
   render() {
-        //
-    // setTimeout(
-    //   function() {
-    //     if (Cookies.get("isAuthenticated") === "true")
-    //       this.props.history.push("/");
-    //   }.bind(this),
-    //   1
-    // );
     if (this.props.auth === true) {
       this.props.history.push("/");
     }
@@ -165,10 +152,7 @@ class SignIn extends Component {
             onChange={this.handlePasswordChange}
             placeholder="Password: "
           />
-          <Button onClick={this.login} />
-          <Button>
-            <Link to={ROUTES.SIGNUP}>Зарегистрироваться</Link>
-          </Button>
+          <Button onClick={this.login}>Войти</Button> 
         </SignInWrapper>
         <Footer />
       </div>

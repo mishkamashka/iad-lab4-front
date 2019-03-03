@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import * as ROUTES from "./routes/routes";
 import SignIn from "./components/signin";
-import SignUp from "./components/signup";
 import Home from "./components/home";
 import SignInContainer from './containers/AuthContainer'
 import "primereact/resources/themes/nova-light/theme.css";
@@ -30,7 +29,6 @@ class App extends Component {
         <AppWrapper>
           <Switch>
             <PrivateRoute exact path={ROUTES.HOME} component={Home} />
-            <Route path={ROUTES.SIGNUP} component={SignUp} />
             <Route path={ROUTES.SIGNIN} component={SignInContainer} />
             <Route path="/fetch" component={FetchApproach} />
 
