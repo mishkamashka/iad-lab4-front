@@ -40,13 +40,8 @@ export default class Footer extends Component {
     return (
       <FooterWrapper>
         <FooterBlock>
-          <p>You should follow me at:</p>
-          <a href="https://vk.com/i___mishkamashka___i">
-            <FooterIcon src={vkSVG} />
-          </a>
-          <a href="https://github.com/mishkamashka">
-            <FooterIcon src={GithubSVG} />
-          </a>
+        <p>Have a good day</p>
+        <p>/ᐠ・ᆽ・ᐟ\</p>
         </FooterBlock>
       </FooterWrapper>
     );

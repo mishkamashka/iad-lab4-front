@@ -11,7 +11,9 @@ export const SET_PASSWORD = "SET_PASSWORD";
 export function signin(username, password) {
   return function(dispatch) {
     const axios = require("axios");
-
+    const md5 = require("md5");
+    var pass = md5(password);
+    console.log(pass);
     axios({
       method: "post",
       url: DEV_SERVER + "/oauth/token",
@@ -24,7 +26,7 @@ export function signin(username, password) {
       params: {
         grant_type: "password",
         username: username,
-        password: password
+        password: pass
       },
       config: {
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
