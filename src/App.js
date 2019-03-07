@@ -7,14 +7,12 @@ import {
   Switch
 } from "react-router-dom";
 import * as ROUTES from "./routes/routes";
-import SignIn from "./components/signin";
 import Home from "./components/home";
 import SignInContainer from './containers/AuthContainer'
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import styled from "styled-components";
-import SignInRoute from "./routes/SignInRoute";
 import NotFoundPage from "./components/error/NotFound";
 import PrivateRoute from "./routes/PrivateRoute";
 import FetchApproach from "./components/signin/FetchApproach";
@@ -31,7 +29,6 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path={ROUTES.HOME} component={Home} />
             <Route path={ROUTES.SIGNIN} component={SignInContainer} />
-            {/* <SignInRoute path={ROUTES.SIGNIN} component={SignInContainer}/> */}
             <Route path="/fetch" component={FetchApproach} />
             <Route component={NotFoundPage} />
           </Switch>

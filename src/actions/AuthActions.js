@@ -40,13 +40,11 @@ export function signin(username, password) {
         var access_token = response.data.access_token;
         var expires_in = response.data.expires_in;
         console.log(response.headers);
-        // What should i do here?
         Cookies.set("access_token", access_token, {
           expires: expires_in / 3600
         });
-        // Cookies.set("isAuthenticated", true);
         //handle success
-        console.log(response + "Перемещаяюсь!");
+        console.log(response + "Перемещаюсь!");
       })
       .catch(function(error) {
         // handle error
