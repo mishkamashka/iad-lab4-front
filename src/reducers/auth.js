@@ -27,7 +27,13 @@ export function authReducer(state = initialState, action) {
     case AUTH_BEGIN:
       return { ...state, authIsInProcess: true, error: null };
     case AUTH_SUCCESS:
-      return { ...state, authIsInProcess: false, auth: action.payload };
+      return {
+        ...state,
+        authIsInProcess: false,
+        login: "",
+        password: "",
+        auth: action.payload
+      };
     case AUTH_FAIL:
       return { ...state, authIsInProcess: false, auth: action.payload };
     case CHECK_AUTH_BEGIN:
@@ -36,7 +42,7 @@ export function authReducer(state = initialState, action) {
     case CHECK_AUTH_SUCCESS:
       //TODO: check this return
       return { ...state, authIsInChecking: false, auth: action.payload };
-      //TODO: check this return
+    //TODO: check this return
     case CHECK_AUTH_FAIL:
       return { ...state, authIsInChecking: false, auth: action.payload };
     default:
