@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Slider } from "primereact/slider";
 import { Dropdown } from "primereact/dropdown";
-import { Link } from "react-router-dom";
-
-import * as ROUTES from "../../routes/routes";
+import { withRouter } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const InputFormWrapper = styled.div`
@@ -108,22 +106,21 @@ class InputForm extends Component {
 
   onClickSendData(e) {
     if (this.props.inputForm.radius.value > 0) {
-    this.props.checkFormPoint(
-      this.props.inputForm.x.value,
-      this.props.inputForm.y,
-      this.props.inputForm.radius.value
-    );
-    }
-    else
-      alert("Invalid radius");
+      this.props.checkFormPoint(
+        this.props.inputForm.x.value,
+        this.props.inputForm.y,
+        this.props.inputForm.radius.value
+      );
+    } else alert("Invalid radius");
   }
 
   onClickClearList(e) {
     this.props.clearPointsList();
   }
 
-  logout(e) {
+  logout = () => {
     Cookies.remove("access_token");
+    this.props.history.push("/signin");
   }
 
   render() {
@@ -181,11 +178,9 @@ class InputForm extends Component {
         </InputR>
         <Button onClick={this.onClickSendData}>check</Button>
         <Button onClick={this.onClickClearList}>clear</Button>
-        <Button onClick={this.logout}>
-            <Link to={ROUTES.SIGNIN}>log out</Link>
-        </Button>
+        <Button onClick={this.logout}>LOG OUT</Button>
       </InputFormWrapper>
     );
   }
 }
-export default InputForm;
+export default withRouter(InputForm);
