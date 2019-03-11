@@ -15,6 +15,7 @@ import styled from "styled-components";
 import NotFoundPage from "./components/error/NotFound";
 import PrivateRoute from "./routes/PrivateRoute";
 import FetchApproach from "./components/signin/FetchApproach";
+import SignInRoute from "./routes/SignInRoute";
 
 const AppWrapper = styled.div`
   height: 100%;
@@ -27,7 +28,7 @@ class App extends Component {
         <AppWrapper>
           <Switch>
             <PrivateRoute exact path={ROUTES.HOME} component={Home} />
-            <Route path={ROUTES.SIGNIN} component={SignInContainer} />
+            <SignInRoute path={ROUTES.SIGNIN} component={SignInContainer} />
             <Route path="/fetch" component={FetchApproach} />
             <Route component={NotFoundPage} />
           </Switch>

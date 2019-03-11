@@ -94,7 +94,7 @@ class SignIn extends Component {
   }
 
   login = () => {
-    if (this.props.login != "" && this.props.password != "") {
+    if (this.props.login !== "" && this.props.password !== "") {
       this.props.signin(this.props.login, this.props.password);
       this.props.history.push("/");
     } else alert("Enter login and password");

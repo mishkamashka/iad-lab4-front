@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "../actions/AuthActions";
 import { withRouter } from "react-router-dom";
-class PrivateRoute extends React.Component {
+class SignInRoute extends React.Component {
   componentWillMount() {
     if (this.props.auth.authIsInProcess !== true) {
       this.props.authActions.checkAuth();
@@ -37,13 +37,13 @@ class PrivateRoute extends React.Component {
       <Route
         render={props =>
           auth.auth ? (
-            <Component {...props} />
-          ) : (
             <Redirect
               to={{
-                pathname: "/signin"
+                pathname: "/"
               }}
             />
+          ) : (
+            <Component {...props} />
           )
         }
       />
@@ -54,7 +54,6 @@ class PrivateRoute extends React.Component {
 const mapStateToProps = store => {
   return {
     auth: store.auth,
-    isLoading: store.isLoading,
     error: store.error
   };
 };
@@ -69,5 +68,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(PrivateRoute)
+  )(SignInRoute)
 );
