@@ -77,7 +77,6 @@ class Graph extends Component {
   drawAxis() {
     const context = this.refs.canvas.getContext("2d");
     const graphWidth = this.refs.canvas.width;
-    const k = 40;
 
     context.beginPath();
     //Draw axis
@@ -115,8 +114,6 @@ class Graph extends Component {
     if (Number(this.props.radius.value) > 0) {
       context.beginPath();
       //   TODO: check var statement
-      var pixelsForRadius = Number(this.props.radius.value) * k;
-
       //Draw measures
       for (var l = 40; l < graphWidth / 2 - 20; l = l + 40) {
         context.moveTo(graphWidth / 2 - l, graphWidth / 2 - 5);

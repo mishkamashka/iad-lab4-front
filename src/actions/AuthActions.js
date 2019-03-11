@@ -1,19 +1,24 @@
 import { DEV_SERVER } from "../routes/routes";
 import Cookies from "js-cookie";
-import history from "../components/util/history";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 
 export const AUTH_BEGIN = "AUTH_BEGIN";
 export const SET_LOGIN = "SET_LOGIN";
 export const SET_PASSWORD = "SET_PASSWORD";
+export const CHECK_AUTH_BEGIN = "CHECK_AUTH_BEGIN";
+export const CHECK_AUTH_SUCCESS = "CHECK_AUTH_SUCCESS";
+export const CHECK_AUTH_FAIL = "CHECK_AUTH_FAIL";
 
 export function signin(username, password) {
   return function(dispatch) {
     const axios = require("axios");
     const md5 = require("md5");
     var pass = md5(password);
-    console.log(pass);
+    dispatch({
+      type: AUTH_BEGIN,
+      payload: true
+    });
     axios({
       method: "post",
       url: DEV_SERVER + "/oauth/token",
@@ -39,12 +44,9 @@ export function signin(username, password) {
         });
         var access_token = response.data.access_token;
         var expires_in = response.data.expires_in;
-        console.log(response.headers);
         Cookies.set("access_token", access_token, {
           expires: expires_in / 3600
         });
-        //handle success
-        console.log(response + "Перемещаюсь!");
       })
       .catch(function(error) {
         // handle error
@@ -83,13 +85,12 @@ export function setPassword(password) {
     });
   };
 }
-export function log() {
+export function checkAuth() {
   return dispatch => {
     const axios = require("axios");
     var access_token = Cookies.get("access_token");
     dispatch({
-      type: AUTH_BEGIN,
-      payload: true
+      type: CHECK_AUTH_BEGIN
     });
     axios
       .get(DEV_SERVER + "/check", {
@@ -97,43 +98,17 @@ export function log() {
       })
       .then(result => {
         dispatch({
-          type: AUTH_SUCCESS,
+          type: CHECK_AUTH_SUCCESS,
           payload: true
         });
       })
       .catch(function(error) {
         // handle error
         dispatch({
-          type: AUTH_FAIL,
+          type: CHECK_AUTH_FAIL,
           payload: false
         });
         console.log(error);
       });
   };
-}
-
-export function subscribe() {
-  return dispatch => {
-    dispatch({
-      type: "subscribe"
-    });
-  };
-}
-
-export function changeAuthStatus(status) {
-  if (status) {
-    return dispatch => {
-      dispatch({
-        type: AUTH_SUCCESS,
-        payload: status
-      });
-    };
-  } else {
-    return dispatch => {
-      dispatch({
-        type: AUTH_FAIL,
-        payload: status
-      });
-    };
-  }
 }

@@ -1,19 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import * as ROUTES from "../../routes/routes";
-import { Link } from "react-router-dom";
 import Header from "../util/Header";
 import Footer from "../util/Footer";
-import { fakeAuth } from "../../routes/PrivateRoute";
-import Cookies from "js-cookie";
 import { withRouter } from "react-router-dom";
-import { DEV_SERVER } from "../../routes/routes";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch
-} from "react-router-dom";
 
 const SignInWrapper = styled.div`
   display: grid;
@@ -100,10 +89,8 @@ const Input = styled.input`
 class SignIn extends Component {
   constructor(props) {
     super(props);
-
     this.handleLoginChange = this.handleLoginChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    // this.login = this.login.bind(this);
   }
 
   login = () => {
@@ -127,14 +114,9 @@ class SignIn extends Component {
     this.props.setLogin(event.target.value);
   }
 
-  componentWillMount() {
-    this.props.subscribe();
-  }
-
   render() {
-    if (this.props.auth === true) {
-      this.props.history.push("/");
-    }
+    if (this.props.auth.authIsInProcess === true)
+      return <div>Подгружаем данные...</div>;
 
     return (
       <div>
@@ -152,7 +134,7 @@ class SignIn extends Component {
             onChange={this.handlePasswordChange}
             placeholder="Password: "
           />
-          <Button onClick={this.login}>Войти</Button> 
+          <Button onClick={this.login}>Войти</Button>
         </SignInWrapper>
         <Footer />
       </div>

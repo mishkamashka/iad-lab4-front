@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import GithubSVG from "../../static/img/github.svg";
-import vkSVG from "../../static/img/vk.d89817ac.svg";
 
 const FooterWrapper = styled.footer`
   display: grid;
@@ -26,13 +24,6 @@ const FooterBlock = styled.div`
   border-left: 1px solid;
   padding-left: 30px;
   padding-right: 30px;
-`;
-
-const FooterIcon = styled.img`
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  margin: 11px;
 `;
 
 export default class Footer extends Component {

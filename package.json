@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "js-cookie": "^2.2.0",
+    "md5": "^2.2.1",
     "primeicons": "^1.0.0",
     "primereact": "^3.0.0-rc.1",
     "react": "^16.7.0",

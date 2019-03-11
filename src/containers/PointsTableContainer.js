@@ -6,7 +6,7 @@ import * as pointsTableActions from '../actions/PointsTableActions'
 
 class PointsTableContainer extends Component {
   render() {
-    const { pointsTable, inputForm, pointsTableActions } = this.props;
+    const { pointsTable, inputForm } = this.props;
     return <PointsTable points={pointsTable.points} radius={inputForm.radius} />;
   }
 }

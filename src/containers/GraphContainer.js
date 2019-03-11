@@ -6,10 +6,15 @@ import * as graphActions from "../actions/GraphActions";
 
 class GraphContainer extends Component {
   render() {
-    const { graph, graphActions, inputForm } = this.props;
+    const { graph, graphActions } = this.props;
     return (
       <div>
-        <Graph radius={graph.radius} points={graph.points} addPoint={graphActions.addPoint} getAllPoints={graphActions.getAllPoints} />
+        <Graph
+          radius={graph.radius}
+          points={graph.points}
+          addPoint={graphActions.addPoint}
+          getAllPoints={graphActions.getAllPoints}
+        />
       </div>
     );
   }

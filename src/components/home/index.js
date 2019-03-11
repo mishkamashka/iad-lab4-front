@@ -6,7 +6,6 @@ import PointsTableContainer from "../../containers/PointsTableContainer";
 import "./index.css";
 import Header from "../util/Header";
 import Footer from "../util/Footer";
-import Cookies from "js-cookie";
 const HomeWrapper = styled.div``;
 class Home extends Component {
   render() {

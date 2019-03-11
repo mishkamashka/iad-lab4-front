@@ -1,43 +1,38 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 // Перенести в SIGN_IN, создать контейнер
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "../actions/AuthActions";
-import Cookies from "js-cookie";
-import { DEV_SERVER } from "../routes/routes";
 import { withRouter } from "react-router-dom";
 class PrivateRoute extends React.Component {
   componentWillMount() {
-    this.props.authActions.log();
+    if (this.props.auth.authIsInProcess !== true) {
+      this.props.authActions.checkAuth();
+    }
   }
 
   render() {
     var Component = this.props.component;
 
-    const { auth, isLoading, error } = this.props;
+    const { auth, error } = this.props;
 
     if (auth.error) {
       return <p>{error.message}</p>;
     }
 
-    if (auth.isLoading) {
-      return <p>Loading ...</p>;
+    if (auth.authIsInProcess) {
+      return <div>Ничего не делаем, аутентифицируемся на сервере</div>;
     }
 
-    // if (auth === true) {
-    //   return <Component />;
-    // } else
-    //   return (
-    //     <Redirect
-    //       to={{
-    //         pathname: "/signin"
-    //       }}
-    //     />
-    //   );
+    if (auth.authIsInChecking) {
+      return <p>Проверяем аутентификацию...</p>;
+    }
+
     if (auth.auth === null) {
       return <div>oh, wait...</div>;
     }
+
     return (
       <Route
         render={props =>
@@ -93,15 +88,3 @@ export default withRouter(
     mapDispatchToProps
   )(PrivateRoute)
 );
-
-export const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false;
-    setTimeout(cb, 100);
-  }
-};
