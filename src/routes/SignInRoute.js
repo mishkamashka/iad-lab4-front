@@ -22,7 +22,7 @@ class SignInRoute extends React.Component {
     }
 
     if (auth.authIsInProcess) {
-      return <div>Ничего не делаем, аутентифицируемся на сервере</div>;
+      return <div>Идет аутентификация...</div>;
     }
 
     if (auth.authIsInChecking) {

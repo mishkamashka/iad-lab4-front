@@ -14,7 +14,6 @@ import "primeicons/primeicons.css";
 import styled from "styled-components";
 import NotFoundPage from "./components/error/NotFound";
 import PrivateRoute from "./routes/PrivateRoute";
-import FetchApproach from "./components/signin/FetchApproach";
 import SignInRoute from "./routes/SignInRoute";
 
 const AppWrapper = styled.div`
@@ -29,7 +28,6 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path={ROUTES.HOME} component={Home} />
             <SignInRoute path={ROUTES.SIGNIN} component={SignInContainer} />
-            <Route path="/fetch" component={FetchApproach} />
             <Route component={NotFoundPage} />
           </Switch>
         </AppWrapper>
