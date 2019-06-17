@@ -1,4 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Internet applications developent
+## Lab work №4 (front)
+Frontend for a lab work for internet application development course
+## Задание
+Разработать приложение, которое осуществляет проверку попадания точки в заданную область на координатной плоскости с использованием следующих технологий:
+* Уровень back-end должен быть основан на Spring. 
+* Уровень front-end должен быть построен на React + Redux (необходимо использовать ES6 и JSX) с использованием набора компонентов PrimeReact 
+* Взаимодействие между уровнями back-end и front-end должно быть организовано посредством REST API. 
+
+Приложение по-прежнему должно включать в себя 2 страницы - стартовую и основную страницу приложения. Обе страницы приложения должны быть адаптированы для отображения в 3 режимах: 
+* "Десктопный" - для устройств, ширина экрана которых равна или превышает 1192 пикселей. 
+* "Планшетный" - для устройств, ширина экрана которых равна или превышает 759, но меньше 1192 пикселей. 
+* "Мобильный"- для устройств, ширина экрана которых меньше 759 пикселей. 
+
+Стартовая страница должна содержать следующие элементы: 
+* "Шапку", содержащую ФИО студента, номер группы и номер варианта. 
+* Форму для ввода логина и пароля. Информация о зарегистрированных в системе пользователях должна храниться в отдельной таблице БД (пароль должен храниться в виде хэш-суммы). Доступ неавторизованных пользователей к основной странице приложения должен быть запрещён. 
+
+Основная страница приложения должна содержать следующие элементы: 
+* Набор полей ввода для задания координат точки и радиуса области в соответствии с вариантом задания: Dropdown {'-2','-1.5','-1','-0.5','0','0.5','1','1.5','2'} для координаты по оси X, Slider (-3 ... 5) для координаты по оси Y, и Dropdown {'-2','-1.5','-1','-0.5','0','0.5','1','1.5','2'} для задания радиуса области. Если поле ввода допускает ввод заведомо некорректных данных (таких, например, как буквы в координатах точки или отрицательный радиус), то приложение должно осуществлять их валидацию. 
+* Динамически обновляемую картинку, изображающую область на координатной плоскости в соответствии с номером варианта и точки, координаты которых были заданы пользователем. 
+* Таблицу со списком результатов предыдущих проверок. 
+* Кнопку, по которой аутентифицированный пользователь может закрыть свою сессию и вернуться на стартовую страницу приложения. 
+
 
 ## Available Scripts
 
@@ -27,42 +50,8 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
